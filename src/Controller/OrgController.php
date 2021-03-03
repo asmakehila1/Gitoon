@@ -18,21 +18,7 @@ class OrgController extends AbstractController
         ]);
     }
 
-      /**
-      * @Route("/org/save")
-      */
-      public function save() {
-        $entityManager = $this->getDoctrine()->getManager();
- 
-        $org = new org();
-        $org->setOrgId('Article 3');
-        $org->setPrix(3000);
-       
-        $entityManager->persist($article);
-        $entityManager->flush();
- 
-        return new Response('Article enregisté avec id   '.$article->getId());
-      }
+      
 
 
 }
