@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block body %}
+    <h1>Reclamation </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type reclamation</th>
+                <th>Objet reclamation</th>
+                <th>Description_reclamation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.id }}</td>
+                <td>{{ reclamation.typeReclamation }}</td>
+                <td>{{ reclamation.objetReclamation }}</td>
+                <td>{{ reclamation.descriptionReclamation }}</td>
+                <td>
+                 {{ include('reclamation/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">non reclamation</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

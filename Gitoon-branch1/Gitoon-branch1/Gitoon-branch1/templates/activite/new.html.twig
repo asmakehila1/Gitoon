@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block body %}
+    <h1>Cree Activite</h1>
+
+    {{ include('activite/_form.html.twig') }}
+
+    <a href="{{ path('activite_index') }}">retour </a>
+{% endblock %}

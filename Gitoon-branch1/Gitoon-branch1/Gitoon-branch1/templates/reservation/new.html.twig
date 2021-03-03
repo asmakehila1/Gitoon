@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block body %}
+    <h1>Crée Reservation</h1>
+
+    {{ include('reservation/_form.html.twig') }}
+
+    <a href="{{ path('reservation_index') }}">retour</a>
+{% endblock %}
