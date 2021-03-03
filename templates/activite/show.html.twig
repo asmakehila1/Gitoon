@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Activite{% endblock %}
+
+{% block body %}
+    <h1>Activite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id_activite</th>
+                <td>{{ activite.idActivite }}</td>
+            </tr>
+            <tr>
+                <th>DescreptionActivite</th>
+                <td>{{ activite.DescreptionActivite }}</td>
+            </tr>
+            <tr>
+                <th>PrixActivite</th>
+                <td>{{ activite.PrixActivite }}</td>
+            </tr>
+            <tr>
+                <th>Centre</th>
+                <td>{{ activite.Centre.nomCentre }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('activite_index') }}">back to list</a>
+
+    <a href="{{ path('activite_edit', {'id_activite': activite.idActivite}) }}">edit</a>
+
+    {{ include('activite/_delete_form.html.twig') }}
+{% endblock %}

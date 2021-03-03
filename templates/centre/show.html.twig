@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Centre{% endblock %}
+
+{% block body %}
+    <h1>Centre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ centre.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom_centre</th>
+                <td>{{ centre.nomCentre }}</td>
+            </tr>
+            <tr>
+                <th>Owner</th>
+                <td>{{ centre.owner }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ centre.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Description_centre</th>
+                <td>{{ centre.descriptionCentre }}</td>
+            </tr>
+            <tr>
+                <th>Prix_centre</th>
+                <td>{{ centre.prixCentre }}</td>
+            </tr>
+            <tr>
+                <th>Photo_centre</th>
+                <td>{{ centre.photoCentre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('centre_index') }}">back to list</a>
+
+    <a href="{{ path('centre_edit', {'id': centre.id}) }}">edit</a>
+
+    {{ include('centre/_delete_form.html.twig') }}
+{% endblock %}
