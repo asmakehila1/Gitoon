@@ -1,0 +1,74 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Centre index{% endblock %}
+
+{% block body %}
+<div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Annonces</li>
+                <li class="breadcrumb-item active"><a href="{{ path('centre_index') }}">Centre</a></li>
+            </ol>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+
+                <a href="{{ path('centre_new') }}" type="button" class="btn btn-info "><i
+                            class="fa fa-plus-circle"></i> Ajouter</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-12">
+          
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table product-overview" id="myTable">
+                            <thead>
+                            <tr>
+                <th>Nom_centre</th>
+                <th>Owner</th>
+                <th>Adresse</th>
+                <th>Description_centre</th>
+                <th>Prix_centre</th>
+                <th>Photo_centre</th>
+                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for centre in centres %}
+                                <tr>
+                                    <td><img src="{{ asset('uploads/')~centre.PhotoCentre }}" alt="iMac" width="80">
+                                    </td>
+                                    <td>{{ centre.id }}</td>
+                <td>{{ centre.nomCentre }}</td>
+                <td>{{ centre.owner }}</td>
+                <td>{{ centre.adresse }}</td>
+                <td>{{ centre.descriptionCentre }}</td>
+                <td>{{ centre.prixCentre }}</td>
+                                    <td><a href="{{ path('centre_show', { 'id':  centre.id }) }}"
+                                           title="Afficher" data-toggle="tooltip"><i class="ti-eye"></i></a>
+                                        <a href="{{ path('centre_edit', { 'id':  centre.id }) }}"
+                                           class="text-inverse p-r-10" data-toggle="tooltip" title="Editer"><i
+                                                    class="ti-marker-alt"></i></a>
+                                                        {{ include('centre/_delete_form.html.twig') }}
+
+                                        
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+
+
+{% endblock %}

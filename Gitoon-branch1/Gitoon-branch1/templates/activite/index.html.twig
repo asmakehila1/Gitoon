@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block body %}
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table product-overview" id="myTable">
+        <thead>
+            <tr>
+                <th>Id activite</th>
+                <th>DescreptionA ctivite</th>
+                <th>Prix Activite</th>
+                <th>Centre </th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activite in activites %}
+            <tr>
+                <td>{{ activite.idActivite }}</td>
+                <td>{{ activite.DescreptionActivite }}</td>
+                <td>{{ activite.PrixActivite }}</td>
+                <td>{{ activite.Centre.nomCentre }}</td>
+
+                <td>
+                    <a href="{{ path('activite_show', {'id_activite': activite.idActivite}) }}">show</a>
+                    <a href="{{ path('activite_edit', {'id_activite': activite.idActivite}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">non activité trouvez</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('activite_new') }}"> Crée Activite</a>
+{% endblock %}
