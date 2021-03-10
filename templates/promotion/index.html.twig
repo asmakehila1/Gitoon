@@ -39,11 +39,11 @@
                                     <td>{{ promotion.descPromo }}</td>
                                     <td>{{ promotion.typePromo }}</td>
                                     <td><img src="{{ asset('uploads/')~promotion.imagePromo}}" alt="imgpromo" ></td>
-                                    <td><a href="{{ path('promotion_show', { 'id_promo':  promotion.id }) }}"
+                                    <td><a href="{{ path('promotion_show', { 'id':  promotion.id }) }}"
                                            title="Afficher" data-toggle="tooltip"><i class="ti-eye"></i></a>
-                                        <a href="{{ path('promotion_edit', { 'id_promo':  promotion.id }) }}"
+                                        <a href="{{ path('promotion_edit', { 'id':  promotion.id }) }}"
                                            title="Modifier"  data-toggle="tooltip"  ><i class="ti-marker-alt"></i></a>
-                                        <a href="{{ path('promotion_delete', { 'id_promo':  promotion.id }) }}"
+                                        <a href="{{ path('promotion_delete', { 'id':  promotion.id }) }}"
                                            title="Supprimer" data-toggle="tooltip"  ><i class="ti-marker-alt"></i></a>
                                     </td>
                                 </tr>
@@ -79,6 +79,7 @@
 
 
 {% block custom_script %}
+
     <script>
         $(function () {
             var data = [
@@ -113,6 +114,7 @@
                 }
             });
         });
+
 
     </script>
 

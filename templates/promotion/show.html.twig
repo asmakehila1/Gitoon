@@ -38,7 +38,7 @@
                                     <tbody>
                                     <tr>
                                         <th>Id</th>
-                                        <td>{{ promotion.idPromo }}</td>
+                                        <td>{{ promotion.id }}</td>
                                     </tr>
                                     <tr>
                                         <th>Titre promotion </th>
@@ -59,7 +59,7 @@
                                     </tbody>
                                 </table>
                                 {{ include('promotion/_delete_form.html.twig') }}
-                                <a href="{{ path('promotion_edit', {'id_promo': promotion.id_promo}) }}" class="btn btn-alert">Modifier</a>
+                                <a href="{{ path('promotion_edit', {'id': promotion.id}) }}" class="btn btn-alert">Modifier</a>
                                 <div>
                                     <a href="{{ path('promotion_index') }}">Retour à la liste </a>
                                 </div>
