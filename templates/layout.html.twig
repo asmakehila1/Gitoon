@@ -16,6 +16,7 @@
     <link href="{{ asset('assets/node_modules/morrisjs/morris.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/node_modules/Magnific-Popup-master/dist/magnific-popup.css') }}" >
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dist/css/pages/float-chart.css')}}" rel="stylesheet">
 
 
 </head>
@@ -148,7 +149,7 @@
                         </ul>
                     </li>
 
-                    
+
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->
@@ -254,6 +255,12 @@
 <script src="{{ asset('assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ asset('assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup-init.js') }}"></script>
 
+<script src="{{ asset('assets/node_modules/flot/excanvas.js') }}"></script>
+<script src="{{ asset('assets/node_modules/flot/jquery.flot.js') }}"></script>
+<script src="{{ asset('assets/node_modules/flot/jquery.flot.pie.js') }}"></script>
+
+<script src="{{ asset('assets/node_modules/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
+
 
 
 
@@ -349,6 +356,11 @@
         })
     });
 </script>
+
+
+{% block custom_script %}
+{% endblock %}
+
 
 </body>
 </html>

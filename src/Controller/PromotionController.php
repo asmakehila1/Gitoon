@@ -22,6 +22,8 @@ class PromotionController extends AbstractController
     {
         return $this->render('promotion/index.html.twig', [
             'promotions' => $promotionRepository->findAll(),
+            'countTypes'=>$promotionRepository->countPromotionByTypes()
+
         ]);
     }
 
@@ -58,7 +60,7 @@ class PromotionController extends AbstractController
     }
 
     /**
-     * @Route("/{id_promo}", name="promotion_show", methods={"GET"})
+     * @Route("/{id}", name="promotion_show", methods={"GET"})
      */
     public function show(Promotion $promotion): Response
     {
@@ -68,7 +70,7 @@ class PromotionController extends AbstractController
     }
 
     /**
-     * @Route("/{id_promo}/edit", name="promotion_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="promotion_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Promotion $promotion): Response
     {
@@ -95,7 +97,7 @@ class PromotionController extends AbstractController
     }
 
     /**
-     * @Route("/{id_promo}", name="promotion_delete", methods={"DELETE"})
+     * @Route("/{id}", name="promotion_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Promotion $promotion): Response
     {

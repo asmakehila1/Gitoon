@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Publicite;
 use App\Form\PubliciteType;
 use App\Repository\PubliciteRepository;
+use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,34 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PubliciteController extends AbstractController
 {
+    /**
+     * @Route("/generatePdf", name="generatePdf", methods={"GET"})
+     */
+    public function generatePdf(PubliciteRepository $publiciteRepository): Response
+    {
+            // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $test = $this->renderView('publicite/table.html.twig', [
+            'publicites' => $publiciteRepository->findAll(),
+        ]);
+        $dompdf->loadHtml($test);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
+
+
+
+        return  $test;
+
+
+    }
+
     /**
      * @Route("/", name="publicite_index", methods={"GET"})
      */
@@ -68,6 +97,22 @@ class PubliciteController extends AbstractController
             'publicite' => $publicite,
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * @Route("/{id}/edit", name="publicite_edit", methods={"GET","POST"})

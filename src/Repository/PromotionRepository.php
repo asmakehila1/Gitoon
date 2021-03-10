@@ -19,21 +19,23 @@ class PromotionRepository extends ServiceEntityRepository
         parent::__construct($registry, Promotion::class);
     }
 
+
+    public function countPromotionByTypes()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('count(p.id) as nombre','p.type_promo as type')
+            ->groupBy('p.type_promo')
+            ->getQuery()
+            ->getResult() ;
+
+    }
+
+
     // /**
     //  * @return Promotion[] Returns an array of Promotion objects
     //  */
     /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+
     */
 
     /*
