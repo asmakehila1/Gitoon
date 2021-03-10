@@ -22,6 +22,8 @@ class PromotionController extends AbstractController
     {
         return $this->render('promotion/index.html.twig', [
             'promotions' => $promotionRepository->findAll(),
+            'countTypes'=>$promotionRepository->countPromotionByTypes()
+
         ]);
     }
 
