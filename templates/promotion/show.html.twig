@@ -1,38 +1,76 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}Promotion{% endblock %}
 
 {% block body %}
-    <h1>Promotion</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id_promo</th>
-                <td>{{ promotion.idPromo }}</td>
-            </tr>
-            <tr>
-                <th>Titre_promo</th>
-                <td>{{ promotion.titrePromo }}</td>
-            </tr>
-            <tr>
-                <th>Desc_promo</th>
-                <td>{{ promotion.descPromo }}</td>
-            </tr>
-            <tr>
-                <th>Image_promo</th>
-                <td>{{ promotion.imagePromo }}</td>
-            </tr>
-            <tr>
-                <th>Type_promo</th>
-                <td>{{ promotion.typePromo }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="{{ path('promotion_index') }}">Promotion</a></li>
+            </ol>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
 
-    <a href="{{ path('promotion_index') }}">back to list</a>
+                <a href="{{ path('promotion_new') }}" type="button" class="btn btn-info "><i
+                            class="fa fa-plus-circle"></i> Ajouter </a>
 
-    <a href="{{ path('promotion_edit', {'id_promo': promotion.id_promo}) }}">edit</a>
+            </div>
+        </div>
+    </div>
 
-    {{ include('promotion/_delete_form.html.twig') }}
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    =                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-6">
+                            <div class="white-box text-center"><img src="{{ asset('uploads/') ~ promotion.imagePromo }}"
+                                                                    class="img-responsive"></div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h3 class="box-title m-t-40">Informations Promotion </h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th>Id</th>
+                                        <td>{{ promotion.idPromo }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Titre promotion </th>
+                                        <td>{{ promotion.titrePromo }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Description promotion </th>
+                                        <td>{{ promotion.descPromo }}</td>
+                                    </tr>
+                                    <tr>
+                                    <th>Type promotion </th>
+                                    <td>{{ promotion.typePromo }}</td>
+                                    </tr>
+                                    <tr>
+                                    <th>Image promotion </th>
+                                    <td>{{ promotion.imagePromo }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                {{ include('promotion/_delete_form.html.twig') }}
+                                <a href="{{ path('promotion_edit', {'id_promo': promotion.id_promo}) }}" class="btn btn-alert">Modifier</a>
+                                <div>
+                                    <a href="{{ path('promotion_index') }}">Retour à la liste </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+
 {% endblock %}

@@ -26,14 +26,14 @@
                                 <th>Titre_promo</th>
                                 <th>Description_promo</th>
                                 <th>Type_promo</th>
-                                <th>Image_pub</th>
+                                <th>Image_promo</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for promotion in promotions %}
                                 <tr>
-                                    <td>{{ promotion.id }}</td>
+                                    <td>{{ promotion.idPromo }}</td>
                                     <td>{{ promotion.titrePromo }}</td>
                                     <td>{{ promotion.descPromo }}</td>
                                     <td>{{ promotion.typePromo }}</td>
@@ -60,5 +60,5 @@
         </div>
         <!-- Column -->
     </div>
-    <a href="{{ path('promotion_new') }}">Ajouter une promotion</a>
+
 {% endblock %}

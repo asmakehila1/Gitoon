@@ -48,7 +48,7 @@ class PromotionController extends AbstractController
             $entityManager->persist($promotion);
             $entityManager->flush();
 
-            return $this->redirectToRoute('publicite_index');
+            return $this->redirectToRoute('promotion_index');
         }
 
         return $this->render('promotion/new.html.twig', [
@@ -76,7 +76,14 @@ class PromotionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $promotion->setTitrePromo($request->get('titre_promo'));
+            $promotion->setDescPromo($request->get('desc_promo'));
+            $promotion->setTypePromo($request->get('type_promo'));
+            $promotion->setImagePromo($request->get('image_promo'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($promotion);
+            $entityManager->flush();
 
             return $this->redirectToRoute('promotion_index');
         }
@@ -92,7 +99,7 @@ class PromotionController extends AbstractController
      */
     public function delete(Request $request, Promotion $promotion): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$promotion->getId_promo(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$promotion->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($promotion);
             $entityManager->flush();

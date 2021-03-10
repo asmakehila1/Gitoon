@@ -1,13 +1,72 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Edit Promotion{% endblock %}
+{% block title %}Nouvelle Promotion{% endblock %}
 
 {% block body %}
-    <h1>Edit Promotion</h1>
+    <h1>Modifier Promotion</h1>
 
-    {{ include('promotion/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="{{ path('promotion_index') }}">Promotion</a></li>
+                <li class="breadcrumb-item active"><a href="{{ path('promotion_new') }}">Modifier</a></li>
+            </ol>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
 
-    <a href="{{ path('promotion_index') }}">back to list</a>
+                <a href="{{ path('promotion_new') }}"  type="button" class="btn btn-info "><i class="fa fa-plus-circle"></i> Ajouter</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
 
-    {{ include('promotion/_delete_form.html.twig') }}
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Modifiez Votre Promotion</h4>
+                    <form method="post"  enctype="multipart/form-data">
+                        {{ form_start(form) }}
+
+                        <div class="form-group ">
+                            <label for="adr"  class="control-label">Titre de la promotion</label>
+                            <input class="form-control" type="text" name="titre_promo"  value="{{promotion.titrePromo}}" minlength="4" maxlength="50" required>
+                        </div>
+                        <div class="form-group ">
+                            <label for="desc"  class="control-label">Description de la promotion</label>
+                            <textarea class="form-control"   rows="4" name="desc_promo" minlength="4" maxlength="300" required >{{promotion.descPromo}}</textarea>
+                        </div>
+                        <div class="form-group ">
+                            <label for="desc"  class="control-label">Type de la promotion</label>
+                            <textarea class="form-control"   rows="4" name="type_promo" minlength="4" maxlength="300" required >{{promotion.typePromo}}</textarea>
+                        </div>
+
+                        <div class="form-group ">
+
+                            <label for="ph" class="control-label">Image de la promotion</label>
+                            <input type="file" id="ph" class="dropify" data-show-remove="false" data-default-file="{{ asset('uploads/')~promotion.imagePromo }}" name="image_promo" accept="image/x-png,image/gif,image/jpeg" />
+
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Modifier</button>
+                            <a type="button" class="btn btn-secondary" href="{{ path('promotion_index') }}">Annuler</a>
+                        </div>
+                        {{ form_end (form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+
+            <ol class="breadcrumb">
+
+                <a href="{{ path('promotion_index') }}">Retour à la liste</a>
+
+            </ol>
+        </div>
+    </div>
+
 {% endblock %}
