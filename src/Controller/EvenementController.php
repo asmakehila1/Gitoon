@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use App\Entity\Evenement;
 use App\Entity\Reservation;
 use App\Form\EvenementType;
@@ -10,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Snappy\Pdf;
 
 /**
  * @Route("/evenement")
@@ -19,16 +21,29 @@ class EvenementController extends AbstractController
     /**
      * @Route("/", name="evenement_index", methods={"GET"})
      */
-    public function index(EvenementRepository $evenementRepository): Response
+    public function index(EvenementRepository $evenementRepository, \Swift_Mailer $mailer): Response
     {
         $evts = $evenementRepository->findAll();
         $entityManager = $this->getDoctrine()->getManager();
         foreach ($evts as $item) {
             if($item->getDate() < new \DateTime() ){
                 $entityManager->remove($item);
+
+
+                $message = (new \Swift_Message('Hello Email'))
+                    ->setFrom('safta.yahya@esprit.tn')
+                    ->setTo('safta.yahya@esprit.tn')
+                    ->setBody("evenement tfassa5")
+
+                ;
+
+                $mailer->send($message);
+
             }
 
+
         }
+
         $entityManager->flush();
         return $this->render('evenement/index.html.twig', [
             'evenements' => $evenementRepository->findAll(),
@@ -131,7 +146,7 @@ class EvenementController extends AbstractController
     /**
      * @Route("/suggestions/{id}", name="evenement_suggestion", methods={"GET"})
      */
-    public function zeb(Request $request, Evenement $evenement): Response
+    public function suggestion(Request $request, Evenement $evenement): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $conn = $this->getDoctrine()->getConnection();
@@ -141,8 +156,21 @@ class EvenementController extends AbstractController
         $stmt->execute(['id' => $evenement->getId()]);
         dump($stmt->fetchAll());
 
-        return $this->render('evenement/index.html.twig', [
-            'evenements' => $stmt->fetchAll()
-        ]);
+        return $this->render('evenement/index.html.twig', ['evenements' => $stmt->fetchAll()]);
+    }
+    /**
+     * @Route("/pdf/all", name="evenement_pdf", methods={"GET"})
+     */
+    public function pdfAction(Pdf $knpSnappyPdf)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $html = $this->renderView('evenement/pdf.html.twig', array(
+            'evenements'  => $entityManager->getRepository(Evenement::class)->findAll()
+        ));
+
+        return new PdfResponse(
+            $knpSnappyPdf->getOutputFromHtml($html),
+            'file.pdf'
+        );
     }
 }
