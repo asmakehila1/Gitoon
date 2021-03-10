@@ -1,0 +1,64 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Promotion{% endblock %}
+
+{% block body %}
+    <h1>Promotion </h1>
+
+    <div class="row page-titles">
+        <div class="d-flex justify-content-end align-items-centper">
+
+            <a href="{{ path('promotion_new') }}" type="button" class="btn btn-info "><i
+                        class="fa fa-plus-circle"></i>  Ajouter </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table product-overview" id="myTable">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Titre_promo</th>
+                                <th>Description_promo</th>
+                                <th>Type_promo</th>
+                                <th>Image_pub</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for promotion in promotions %}
+                                <tr>
+                                    <td>{{ promotion.id }}</td>
+                                    <td>{{ promotion.titrePromo }}</td>
+                                    <td>{{ promotion.descPromo }}</td>
+                                    <td>{{ promotion.typePromo }}</td>
+                                    <td><img src="{{ asset('uploads/')~promotion.imagePromo}}" alt="imgpromo" ></td>
+                                    <td><a href="{{ path('promotion_show', { 'id_promo':  promotion.id }) }}"
+                                           title="Afficher" data-toggle="tooltip"><i class="ti-eye"></i></a>
+                                        <a href="{{ path('promotion_edit', { 'id_promo':  promotion.id }) }}"
+                                           title="Modifier"  data-toggle="tooltip"  ><i class="ti-marker-alt"></i></a>
+                                        <a href="{{ path('promotion_delete', { 'id_promo':  promotion.id }) }}"
+                                           title="Supprimer" data-toggle="tooltip"  ><i class="ti-marker-alt"></i></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">Pas de promotion !</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+    <a href="{{ path('promotion_new') }}">Ajouter une promotion</a>
+{% endblock %}
