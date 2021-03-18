@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="4x4" href="assets/img/customimg/logo.png">
+    <title>Gitoon Admin</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/customimg/logo.png') }}">
 
     <link href="{{ asset('assets/node_modules/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('dist/css/pages/file-upload.css') }}" rel="stylesheet">
@@ -48,15 +50,18 @@
                     <!-- Logo icon --><b>
                         <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                         <!-- Dark Logo icon -->
+<img src="assets/img/customimg/logo.png" width="45" height="45" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo icon -->
+                            <img src="assets/img/customimg/logo.png" width="45" height="45" alt="homepage" class="light-logo" />
 
 
                     </b>
                     <!--End Logo icon -->
                     <!-- Logo text --><span>
                          <!-- dark Logo text -->
-                         <img src="{{ asset('uploads/gitoonlogo.png') }}" alt="GITOON" class="dark-logo" />
+                         <img src="assets/img/customimg/logo.png" alt="GITOON" class="dark-logo" />
                         <!-- Light Logo text -->
-                         <img src="{{ asset('uploads/gitoonlogo.png') }}" class="light-logo" alt="GITOON" /></span> </a>
+                         <img src="assets/img/customimg/gitoon.png" class="light-logo" alt="GITOON" /></span> </a>
             </div>
             <!-- ============================================================== -->
             <!-- End Logo -->
@@ -71,7 +76,12 @@
                     <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
                     <!-- ============================================================== -->
                     <!-- Search -->
-                    <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item">
+                            <form class="app-search d-none d-md-block d-lg-block">
+                                <input type="text" class="form-control" placeholder="Search & enter">
+                            </form>
+                        </li>
                 </ul>
                 <!-- ============================================================== -->
                 <!-- User profile and search -->
@@ -145,6 +155,8 @@
                             <li><a href="{{ path('activite_index') }}">Activite</a></li>
                             <li><a href="{{ path('publicite_index') }}">Publicite</a></li>
                             <li><a href="{{ path('promotion_index') }}">Promotion</a></li>
+                            <li><a href="{{ path('org_index') }}">Organizations</a></li>
+                            <li><a href="{{ path('stories_index') }}">Success Stories</a></li>
 
                         </ul>
                     </li>
@@ -217,7 +229,7 @@
     <!-- footer -->
     <!-- ============================================================== -->
     <footer class="footer">
-        © 2020 Esprit
+    © 2020 Esprit
     </footer>
     <!-- ============================================================== -->
     <!-- End footer -->
