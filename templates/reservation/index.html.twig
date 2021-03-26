@@ -2,41 +2,112 @@
 
 
 {% block body %}
-    <h1>Reservation</h1>
+    <h1>Liste des reservations</h1>
+    <div class="card">
+        <div class="card-body">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Client</th>
-                <th>Centre</th>
-                <th>Evenement</th>
-                <th>Materiels</th>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Client</th>
+                    <th>Centre</th>
+                    <th>Evenement</th>
 
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for reservation in reservations %}
-            <tr>
-                <td>{{ reservation.id }}</td>
-                <td>{{ reservation.Client.nom }}</td>
-                <td>{{ reservation.Centre.nomCentre }}</td>
-                <td>{{ reservation.Evenement.descrptionEvent }}</td>
-                <td>{{ reservation.Materiels.NomMat }}</td>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.id }}</td>
+                        <td>{{ reservation.Client.nom }}</td>
+                        <td>{{ reservation.Centre.nomCentre }}</td>
+                        <td>{{ reservation.Evenement.descrptionEvent }}</td>
 
-                <td>
-                    <a href="{{ path('reservation_show', {'id': reservation.id}) }}">show</a>
-                    <a href="{{ path('reservation_edit', {'id': reservation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="2">non reservation trouvez</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                        <td>
+                            <a href="{{ path('reservation_show', {'id': reservation.id}) }}">show</a>
+                            <a href="{{ path('reservation_edit', {'id': reservation.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="2">non reservation trouvez</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    <a href="{{ path('reservation_new') }}">passer reservation</a>
+            <a href="{{ path('reservation_new') }}" type="button" class="btn btn-info "><i
+                        class="fa fa-plus-circle"></i> Aouter une reservation</a>
+
+
+
+            <a href="{{ path('genPdf') }}" type="button" class="btn btn-success"><i
+                        class="fa fa-check"></i>  Telecharger Pdf </a>
+            </table>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-8 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex m-b-40 align-items-center no-block">
+                        <h5 class="card-title ">SALES DIFFERENCE</h5>
+                        <div class="ml-auto">
+                            <ul class="list-inline font-12">
+                                <li><i class="fa fa-circle text-cyan"></i> SITE A</li>
+                                <li><i class="fa fa-circle text-primary"></i> SITE B</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="morris-area-chart2" style="height: 340px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-12">
+        <div class="row">
+            <!-- Column -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">SALES DIFFERENCE</h5>
+                        <div class="row">
+                            <div class="col-6  m-t-30">
+                                <h1 class="text-info">$647</h1>
+                                <p class="text-muted">APRIL 2017</p>
+                                <b>(150 Sales)</b> </div>
+                            <div class="col-6">
+                                <div id="sparkline2dash" class="text-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block custom_script %}
+
+    <script src="../assets/node_modules/raphael/raphael-min.js"></script>
+    <script src="../assets/node_modules/morrisjs/morris.min.js"></script>
+    <script src="../assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script>
+
+    </script>
+
+
+
+
+
 {% endblock %}

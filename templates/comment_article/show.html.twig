@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}CommentArticle{% endblock %}
+
+{% block body %}
+    <h1>CommentArticle</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ comment_article.id }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ comment_article.contenu }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ comment_article.date ? comment_article.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('comment_article_index') }}">back to list</a>
+
+    <a href="{{ path('comment_article_edit', {'id': comment_article.id}) }}">edit</a>
+
+    {{ include('comment_article/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        mid {
+            text-align: center;
+            padding: 15px;
+
+        }
+
+        tr:nth-child(even){background-color: #f2f2f2}
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1> Liste des centres</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Propriétaire</th>
+        <th>Adresse</th>
+        <th>Prix</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for centre in centres %}
+        <tr>
+*            <td>{{ centre.id }}</td>
+            <td>{{ centre.nomCentre }}</td>
+            <td>{{ centre.descriptionCentre }}</td>
+
+            <td>{{ centre.owner }}</td>
+            <td>{{ centre.adresse }}</td>
+
+            <td>{{ centre.prixCentre }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6">pas de centres</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+</html>
+
+
+

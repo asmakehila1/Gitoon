@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Reclamation;
 use App\Form\ReclamationType;
+use App\Repository\CentreRepository;
 use App\Repository\ReclamationRepository;
+use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +17,36 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ReclamationController extends AbstractController
 {
+
+
+    /**
+     * @Route("/genrPdf", name="genrPdf", methods={"GET"})
+     */
+    public function genrPdf(ReclamationRepository $reclamationRepository): Response
+    {
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $test = $this->renderView('reclamation/tab.html.twig', [
+            'reclamations' => $reclamationRepository->findAll(),
+        ]);
+        $dompdf->loadHtml($test);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
+        return  $test;
+
+
+    }
+
+
+
+
     /**
      * @Route("/", name="reclamation_index", methods={"GET"})
      */
