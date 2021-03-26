@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Centre;
 use App\Form\Centre1Type;
 use App\Repository\CentreRepository;
+use App\Repository\ReservationRepository;
+use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +17,62 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CentreController extends AbstractController
 {
+
+    /**
+     * @Route("/genrPdf", name="genrPdf", methods={"GET"})
+     */
+    public function genrPdf(CentreRepository $centreRepository): Response
+    {
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $test = $this->renderView('centre/tab.html.twig', [
+            'centres' => $centreRepository->findAll(),
+        ]);
+        $dompdf->loadHtml($test);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
+        return  $test;
+
+
+    }
+
+
+
+
+
+
+    /**
+     * @Route("/Pdf", name="Pdf", methods={"GET"})
+     */
+    public function Pdf(CentreRepository $centreRepository , int $id): Response
+    {
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+
+        $test = $this->renderView('centre/pdf.html.twig', [
+            'centres' => $centreRepository->findoneBy($id),
+        ]);
+        $dompdf->loadHtml($test);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
+        return  $test;
+
+
+    }
     /**
      * @Route("/", name="centre_index", methods={"GET"})
      */
@@ -35,6 +93,11 @@ class CentreController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+
+            
+
+
+           
             $centre->setNomCentre($request->get('nom_centre'));
             $centre->setOwner($request->get('owner'));
             $centre->setAdresse($request->get('address'));

@@ -40,6 +40,21 @@ class Evenement extends AbstractController
      */
     private $reservations;
 
+
+
+
+    /**
+     * Transform to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
+
+
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -47,7 +62,7 @@ class Evenement extends AbstractController
 
     public function getId(): ?int
     {
-        return $this->id_event;
+        return $this->id;
     }
 
     public function getPrix(): ?float

@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}CommentArticle index{% endblock %}
+
+{% block body %}
+    <h1>CommentArticle index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Contenu</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment_article in comment_articles %}
+            <tr>
+                <td>{{ comment_article.id }}</td>
+                <td>{{ comment_article.contenu }}</td>
+                <td>{{ comment_article.date ? comment_article.date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('comment_article_show', {'id': comment_article.id}) }}">show</a>
+                    <a href="{{ path('comment_article_edit', {'id': comment_article.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('comment_article_new') }}">Create new</a>
+{% endblock %}

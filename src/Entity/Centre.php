@@ -59,6 +59,17 @@ class Centre
      */
     private $reservations;
 
+
+
+    /**
+     * Transform to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
     public function __construct()
     {
         $this->activites = new ArrayCollection();

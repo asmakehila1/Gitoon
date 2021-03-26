@@ -2,71 +2,72 @@
 
 
 {% block body %}
-    <h1>Cree Centre</h1>
+    <h1>Ajouter un centre</h1>
 
-<div class="row page-titles">
-    <div class="col-md-5 align-self-center">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Annonces</li>
-            <li class="breadcrumb-item active"><a href="{{ path('centre_index') }}">Centre</a></li>
-            <li class="breadcrumb-item active"><a href="{{ path('centre_new') }}">Ajouter</a></li>
-        </ol>
-    </div>
-    <div class="col-md-7 align-self-center text-right">
-        <div class="d-flex justify-content-end align-items-center">
-
-            <a href="{{ path('centre_new') }}"  type="button" class="btn btn-info "><i class="fa fa-plus-circle"></i> Ajouter</a>
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Annonces</li>
+                <li class="breadcrumb-item active"><a href="{{ path('centre_index') }}">Centre</a></li>
+                <li class="breadcrumb-item active"><a href="{{ path('centre_new') }}">Ajouter</a></li>
+            </ol>
         </div>
-    </div>
-</div>
-<div class="row">
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
 
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Ajouter Votre Annonce</h4>
-                <form method="post"  enctype="multipart/form-data">
-                    {{ form_start(form) }}
-
-                    <div class="form-group ">
-                        <label for="adr"  class="control-label">nom de centre</label>
-                            <input class="form-control" type="text" name="nom_centre" minlength="4" maxlength="50" required>
-                    </div>
-                    <div class="form-group ">
-                        <label for="desc"  class="control-label">description de centre</label>
-                        <textarea class="form-control"   rows="4" name="description_centre" minlength="4" maxlength="300" required ></textarea>
-                    </div>
-                    
-                      <div class="form-group ">
-                        <label for="adr"  class="control-label">Owner </label>
-                            <input class="form-control" type="text" name="owner" minlength="4" maxlength="50" required>
-                    </div>
-                    <div class="form-group ">
-                        <label for="adr"  class="control-label">Addresse</label>
-                            <input class="form-control" type="text" id="adr" name="address" minlength="4" maxlength="50" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pr" class="control-label">prix centre</label>
-                            <input class="form-control" type="number" min="1" minlength="1" maxlength="5" id="pr" name="prix_centre" required>
-                    </div>
-                    <div class="form-group ">
-
-                                <label for="ph" class="control-label">Photo</label>
-                                <input type="file" id="ph" class="dropify" data-show-remove="false" name="photo_centre" accept="image/x-png,image/gif,image/jpeg" required/>
-
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Ajouter</button>
-                        <a type="button" class="btn btn-secondary" href="{{ path('centre_index') }}">Annuler</a>
-                    </div>
-                    {{ form_end (form) }}
-                </form>
+                <a href="{{ path('centre_new') }}"  type="button" class="btn btn-info "><i class="fa fa-plus-circle"></i> Ajouter</a>
             </div>
         </div>
     </div>
-</div>
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Ajouter Votre Annonce</h4>
+                    <form method="post"  enctype="multipart/form-data">
+                        {{ form_start(form) }}
+
+                        <div class="form-group ">
+                            <label for="adr"  class="control-label">nom de centre</label>
+                            <input class="form-control" type="text" name="nom_centre" minlength="4" maxlength="50" required>
+                        </div>
+                        <div class="form-group ">
+                            <label for="desc"  class="control-label">description de centre</label>
+                            <textarea class="form-control"   rows="4" name="description_centre" minlength="4" maxlength="300" required ></textarea>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="adr"  class="control-label">Owner </label>
+                            <input class="form-control" type="text" name="owner" minlength="4" maxlength="50" required>
+                        </div>
+                        <div class="form-group ">
+                            <label for="adr"  class="control-label">Addresse</label>
+                            <input class="form-control" type="text" id="adr" name="address" minlength="4" maxlength="50" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pr" class="control-label">prix centre</label>
+                            <input class="form-control" type="number" min="1" minlength="1" maxlength="5" id="pr" name="prix_centre" required>
+                        </div>
+                        <div class="form-group ">
+
+                            <label for="ph" class="control-label">Photo</label>
+                            <input type="file" id="ph" class="dropify" data-show-remove="false" name="photo_centre" accept="image/x-png,image/gif,image/jpeg" required/>
+
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Ajouter</button>
+                            <a type="button" class="btn btn-secondary" href="{{ path('centre_index') }}">Annuler</a>
+                        </div>
+                        {{ form_end (form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <a href="{{ path('centre_index') }}">back to list</a>
 {% endblock %}
