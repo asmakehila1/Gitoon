@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MaterielsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,14 +20,14 @@ class Materiels
     private $id;
 
     /**
-     * @ORM\Column(type="string",length=255)
+     * @ORM\Column(type="integer")
      */
-    private $nom;
+    private $Nom_mat;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string", length=255)
      */
-    private $prix;
+    private $prix_mat;
 
     /**
      * @ORM\Column(type="float")
@@ -33,131 +35,136 @@ class Materiels
     private $quantite;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
-    private $dureeLocation;
+    private $duree_location;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string")
      */
     private $statu;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="string", length=255)
      */
-    private $photo;
+    private $photo_materiel;
 
     /**
-     * @return mixed
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="Materiels")
      */
-    public function getId()
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
+    /**
+     * @ORM\Column(type="blob")
+     */
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
+    public function getNomMat(): ?string
     {
-        $this->id = $id;
+        return $this->Nom_mat;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getNom()
+    public function setNomMat(string $Nom_mat): self
     {
-        return $this->nom;
+        $this->Nom_mat = $Nom_mat;
+
+        return $this;
     }
 
-    /**
-     * @param mixed $nom
-     */
-    public function setNom($nom): void
+    public function getPrixMat(): ?float
     {
-        $this->nom = $nom;
+        return $this->prix_mat;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPrix()
+    public function setPrixMat(float $prix_mat): self
     {
-        return $this->prix;
+        $this->prix_mat = $prix_mat;
+
+        return $this;
     }
 
-    /**
-     * @param mixed $prix
-     */
-    public function setPrix($prix): void
-    {
-        $this->prix = $prix;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQuantite()
+    public function getQuantite(): ?int
     {
         return $this->quantite;
     }
 
-    /**
-     * @param mixed $quantite
-     */
-    public function setQuantite($quantite): void
+    public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDureeLocation()
+    public function getDureeLocation(): ?\DateInterval
     {
-        return $this->dureeLocation;
+        return $this->duree_location;
     }
 
-    /**
-     * @param mixed $dureeLocation
-     */
-    public function setDureeLocation($dureeLocation): void
+    public function setDureeLocation(\DateInterval $duree_location): self
     {
-        $this->dureeLocation = $dureeLocation;
+        $this->duree_location = $duree_location;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStatu()
+    public function getStatu(): ?string
     {
         return $this->statu;
     }
 
-    /**
-     * @param mixed $statu
-     */
-    public function setStatu($statu): void
+    public function setStatu(string $statu): self
     {
         $this->statu = $statu;
+
+        return $this;
+    }
+
+    public function getPhotoMateriel()
+    {
+        return $this->photo_materiel;
+    }
+
+    public function setPhotoMateriel($photo_materiel): self
+    {
+        $this->photo_materiel = $photo_materiel;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return Collection|Reservation[]
      */
-    public function getPhoto()
+    public function getReservations(): Collection
     {
-        return $this->photo;
+        return $this->reservations;
     }
 
-    /**
-     * @param mixed $photo
-     */
-    public function setPhoto($photo): void
+    public function addReservation(Reservation $reservation): self
     {
-        $this->photo = $photo;
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setMateriels($this);
+        }
+
+        return $this;
     }
 
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getMateriels() === $this) {
+                $reservation->setMateriels(null);
+            }
+        }
 
+        return $this;
+    }
 }

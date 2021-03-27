@@ -2,15 +2,29 @@
 
 
 {% block body %}
-    <h1>Détails de centre:{{ centre.nomCentre }}</h1>
 
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Centre</li>
+                </li>
+            </ol>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
 
+                <a href="{{ path('centre_new') }}" type="button" class="btn btn-info "><i
+                            class="fa fa-plus-circle"></i> Ajouter</a>
+
+            </div>
+        </div>
+    </div>
     <div class="row">
         <!-- Column -->
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    =                    <div class="row">
+=                    <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-6">
                             <div class="white-box text-center"><img src="{{ asset('uploads/')~centre.photoCentre }}"
                                                                     class="img-responsive"></div>
@@ -25,30 +39,28 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <tbody>
-                                    <tr>
-                                        <th>Id</th>
-                                        <td>{{ centre.id }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nom centre</th>
-                                        <td>{{ centre.nomCentre }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Owner</th>
-                                        <td>{{ centre.owner }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Adresse</th>
-                                        <td>{{ centre.adresse }}</td>
-                                    </tr>
-
+                                      <tr>
+                <th>Id</th>
+                <td>{{ centre.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom centre</th>
+                <td>{{ centre.nomCentre }}</td>
+            </tr>
+            <tr>
+                <th>Owner</th>
+                <td>{{ centre.owner }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ centre.adresse }}</td>
+            </tr>
+           
 
                                     </tbody>
                                 </table>
-                                {{ include('centre/_delete_form.html.twig') }}
-                                <a href="{{ path('centre_edit', {'id': centre.id}) }}" class="btn btn-success"> <i class="fa fa-check"></i>Modifier</a>
-
-
+                                                                                        {{ include('centre/_delete_form.html.twig') }}
+    <a href="{{ path('centre_edit', {'id': centre.id}) }}" class="btn btn-alert">Modifier</a>
 
                             </div>
                         </div>
@@ -58,8 +70,6 @@
         </div>
         <!-- Column -->
     </div>
-
-    <a href="{{ path('centre_index') }}">Liste des centres</a>
 
 
 {% endblock %}

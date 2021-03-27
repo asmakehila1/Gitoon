@@ -1,0 +1,25 @@
+<html>
+<body>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id </th>
+        <th>Prix event</th>
+        <th>Descrption_event</th>
+        <th>date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for evenement in evenements %}
+        <tr>
+            <td>{{ evenement.id }}</td>
+            <td>{{ evenement.prixEvent }}</td>
+            <td>{{ evenement.descrptionEvent }}</td>
+            <td>{{ evenement.date|date("d/m/Y") }}</td>
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

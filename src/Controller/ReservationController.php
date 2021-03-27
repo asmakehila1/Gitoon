@@ -4,9 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Form\ReservationType;
-use App\Repository\PubliciteRepository;
 use App\Repository\ReservationRepository;
-use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,30 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ReservationController extends AbstractController
 {
-    /**
-     * @Route("/genPdf", name="genPdf", methods={"GET"})
-     */
-    public function genPdf(ReservationRepository $reservationRepository): Response
-    {
-        // instantiate and use the dompdf class
-        $dompdf = new Dompdf();
-        $test = $this->renderView('reservation/tab.html.twig', [
-            'reservations' => $reservationRepository->findAll(),
-        ]);
-        $dompdf->loadHtml($test);
-
-        // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser
-        $dompdf->stream();
-        return  $test;
-
-
-    }
     /**
      * @Route("/", name="reservation_index", methods={"GET"})
      */
