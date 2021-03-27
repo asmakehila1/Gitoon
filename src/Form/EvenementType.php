@@ -15,9 +15,11 @@ class EvenementType extends AbstractType
     {
         $builder
             ->add('id')
+            ->add('nom')
             ->add('prix_event')
             ->add('descrption_event')
-            ->add('date')
+            ->add('date_debut')
+            ->add('date_fin')
             ->add('photo_event', FileType::class, array('data_class' => null), ['label' => 'Image : ']);
         ;
     }

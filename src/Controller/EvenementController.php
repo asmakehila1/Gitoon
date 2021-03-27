@@ -25,15 +25,30 @@ class EvenementController extends AbstractController
     {
         $evts = $evenementRepository->findAll();
         $entityManager = $this->getDoctrine()->getManager();
+
         foreach ($evts as $item) {
-            if($item->getDate() < new \DateTime() ){
-                $entityManager->remove($item);
+            if(($item->getDate_debut() >= new \DateTime() || $item->getDate_fin() >= new \DateTime()) && $item->getActif() == true){
+                $item->setActif(false);
 
 
                 $message = (new \Swift_Message('Hello Email'))
                     ->setFrom('safta.yahya@esprit.tn')
                     ->setTo('safta.yahya@esprit.tn')
-                    ->setBody("evenement tfassa5")
+                    ->setBody("evenement n'est plus actif")
+
+                ;
+
+                $mailer->send($message);
+
+            }
+            if(($item->getDate_debut() <= new \DateTime() && $item->getDate_fin() >= new \DateTime()) && $item->getActif() == false){
+                $item->setActif(true);
+
+
+                $message = (new \Swift_Message('Hello Email'))
+                    ->setFrom('safta.yahya@esprit.tn')
+                    ->setTo('safta.yahya@esprit.tn')
+                    ->setBody("evenement n'est plus actif")
 
                 ;
 
@@ -43,11 +58,41 @@ class EvenementController extends AbstractController
 
 
         }
-
         $entityManager->flush();
+
         return $this->render('evenement/index.html.twig', [
             'evenements' => $evenementRepository->findAll(),
         ]);
+    }
+    /**
+     * @Route("/search/{data}", name="evenement_search", methods={"GET"})
+     */
+    public function search(EvenementRepository $evenementRepository, $data = ""): Response
+    {
+        $evenements = $evenementRepository->createQueryBuilder('c')
+        ->where('c.nom  like :data')
+            ->setParameter(":data",'%'.$data.'%')
+            ->getQuery()
+            ->getResult();
+        $resp = "";
+        foreach ($evenements as $item) {
+            $resp.= '<tr>
+                <td>'.$item->getId().'</td>
+                <td>'.$item->getNom().'</td>
+                <td>'.$item->getPrixEvent().'</td>
+                <td>'.$item->getDescrptionEvent().'</td>
+                <td>'.$item->getDate_debut()->format("Y-m-d").'</td>
+                <td>'.$item->getDateFin()->format("Y-m-d").'</td>
+                <td>'.($item->getActif() == true ? "En cours" : "Pas en cours").'</td>
+                <td><img src ="/uploads/images/'.$item->getPhotoEvent().'"
+                         alt =""  width="100" height="100"></td>
+                <td>
+                    <a href="/evenement/'.$item->getId().'">show</a>
+                    <a href="/evenement/'.$item->getId().'/edit">edit</a>
+                </td>
+            </tr>';
+        }
+        return new Response($resp);
     }
 
     /**

@@ -30,12 +30,27 @@ class Evenement extends AbstractController
     /**
      * @ORM\Column(type="string", length=2000)
      */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="text", length=2000)
+     */
     private $descrption_event;
 
     /**
      * @ORM\Column(type="date", length=2000, nullable=true)
      */
-    private $date;
+    private $date_debut;
+
+    /**
+     * @ORM\Column(type="date", length=2000, nullable=true)
+     */
+    private $date_fin;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $actif;
 
     /**
      * @ORM\Column(type="string", length=200)
@@ -45,12 +60,70 @@ class Evenement extends AbstractController
     private $photo_event;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="Evenement")
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="Evenement", cascade="all")
      */
     private $reservations;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="evenement")
+     */
+    private $participations;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getParticipations(): ArrayCollection
+    {
+        return $this->participations;
+    }
+
+    /**
+     * @param ArrayCollection $participations
+     */
+    public function setParticipations(ArrayCollection $participations): void
+    {
+        $this->participations = $participations;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param mixed $nom
+     */
+    public function setNom($nom): void
+    {
+        $this->nom = $nom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActif()
+    {
+        return $this->actif;
+    }
+
+    /**
+     * @param mixed $actif
+     */
+    public function setActif($actif): void
+    {
+        $this->actif = $actif;
+    }
+
+
+
+
     public function __construct()
     {
+        $this->participations = new ArrayCollection();
         $this->reservations = new ArrayCollection();
     }
 
@@ -137,18 +210,71 @@ class Evenement extends AbstractController
     /**
      * @return mixed
      */
-    public function getDate()
+    public function getDate_debut()
     {
-        return $this->date;
+        return $this->date_debut;
     }
 
     /**
-     * @param mixed $date
+     * @param mixed $date_debut
      */
-    public function setDate($date): void
+    public function setDate_debut($date_debut): void
     {
-        $this->date = $date;
+        $this->date_debut = $date_debut;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDate_fin()
+    {
+        return $this->date_fin;
+    }
+
+    /**
+     * @param mixed $date_fin
+     */
+    public function setDate_fin($date_fin): void
+    {
+        $this->date_fin = $date_fin;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getDateDebut()
+    {
+        return $this->date_debut;
+    }
+
+
+    public function setDateDebut($date_debut): void
+    {
+        $this->date_debut = $date_debut;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateFin()
+    {
+        return $this->date_fin;
+    }
+
+
+    public function setDateFin($date_fin): void
+    {
+        $this->date_fin = $date_fin;
+    }
+
+
+
+
+    public function __toString()
+    {
+        return $this->getNom();
+    }
 
 }

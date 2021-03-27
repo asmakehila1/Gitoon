@@ -12,12 +12,20 @@
                 <td>{{ evenement.id }}</td>
             </tr>
             <tr>
+                <th>Nom</th>
+                <td>{{ evenement.nom }}</td>
+            </tr>
+            <tr>
                 <th>Prix_event</th>
                 <td>{{ evenement.prixEvent }}</td>
             </tr>
             <tr>
-                <th>Date</th>
-                <td>{{ evenement.date|date("d/m/Y") }}</td>
+                <th>Date Debut</th>
+                <td>{{ evenement.date_debut|date("d/m/Y") }}</td>
+            </tr>
+            <tr>
+                <th>Date Fin</th>
+                <td>{{ evenement.date_fin|date("d/m/Y") }}</td>
             </tr>
             <tr>
                 <th>Descrption_event</th>
