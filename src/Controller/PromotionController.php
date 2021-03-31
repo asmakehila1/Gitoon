@@ -29,6 +29,30 @@ class PromotionController extends AbstractController
         ]);
     }
     /**
+     * @Route("/front/index/orderNewPrice", name="promotion_front_index_order_New", methods={"GET"})
+     */
+    public function orderNewIndex(PromotionRepository $promotionRepository, PubliciteRepository $publiciteRepository): Response
+    {
+        return $this->render('promotion/front_index.html.twig', [
+            'publicites' => $publiciteRepository->findAll(),
+            'promotions' => $promotionRepository->orderByPriceNew(),
+            'countTypes'=>$promotionRepository->countPromotionByTypes()
+
+        ]);
+    }
+    /**
+     * @Route("/front/index/orderOldPrice", name="promotion_front_index_order_Old", methods={"GET"})
+     */
+    public function orderOldIndex(PromotionRepository $promotionRepository, PubliciteRepository $publiciteRepository): Response
+    {
+        return $this->render('promotion/front_index.html.twig', [
+            'publicites' => $publiciteRepository->findAll(),
+            'promotions' => $promotionRepository->orderByPriceOld(),
+            'countTypes'=>$promotionRepository->countPromotionByTypes()
+
+        ]);
+    }
+    /**
      * @Route("/", name="promotion_index", methods={"GET"})
      */
     public function index(PromotionRepository $promotionRepository): Response
