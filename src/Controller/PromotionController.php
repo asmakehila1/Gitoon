@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Promotion;
 use App\Form\PromotionType;
 use App\Repository\PromotionRepository;
+use App\Repository\PubliciteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,18 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PromotionController extends AbstractController
 {
+    /**
+     * @Route("/front/index", name="promotion_front_index", methods={"GET"})
+     */
+    public function frontIndex(PromotionRepository $promotionRepository, PubliciteRepository $publiciteRepository): Response
+    {
+        return $this->render('promotion/front_index.html.twig', [
+            'publicites' => $publiciteRepository->findAll(),
+            'promotions' => $promotionRepository->findAll(),
+            'countTypes'=>$promotionRepository->countPromotionByTypes()
+
+        ]);
+    }
     /**
      * @Route("/", name="promotion_index", methods={"GET"})
      */
