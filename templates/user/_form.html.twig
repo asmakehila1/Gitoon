@@ -1,0 +1,48 @@
+{{ form_start(form) }}
+
+    {{ form_errors(form) }}
+ <div class="row">
+                    <div class="col-lg-12">
+                        <div class="dash-edit-p">
+                                    <div class="u-s-m-b-30">
+                                        {{ form_errors(form.nom) }}
+                                        {{ form_label(form.nom, 'Nom*', {'label_attr': {'class': 'gl-label'}}) }}
+                                        {{ form_widget(form.nom, { 'attr': { 'placeholder': 'Nom...', 'class':'input-text input-text--primary-style'} } ) }}
+                                    </div>
+                                <div class="u-s-m-b-30">
+                                    {{ form_errors(form.prenom) }}
+                                    {{ form_label(form.prenom, 'Prenom*', {'label_attr': {'class': 'gl-label'}}) }}
+                                    {{ form_widget(form.prenom, { 'attr': { 'placeholder': 'Prenom...', 'class':'input-text input-text--primary-style'} } ) }}
+                                </div>
+
+                                <div class="u-s-m-b-30">
+                                    {{ form_errors(form.mail) }}
+                                    {{ form_label(form.mail, 'Adresse Mail*', {'label_attr': {'class': 'gl-label'}}) }}
+                                    {{ form_widget(form.mail, { 'attr': { 'placeholder': 'Adresse Mail', 'class':'input-text input-text--primary-style'} } ) }}
+                                </div>
+                                <div class="u-s-m-b-30">
+                                    {{ form_errors(form.adresse) }}
+                                    {{ form_label(form.adresse, 'Adresse*', {'label_attr': {'class': 'gl-label'}}) }}
+                                    {{ form_widget(form.adresse, { 'attr': { 'placeholder': 'Adresse', 'class':'input-text input-text--primary-style'} } ) }}
+                                </div>
+                                <div class="u-s-m-b-30">
+                                    {{ form_errors(form.telephone) }}
+                                {{ form_label(form.telephone, 'Telephone*', {'label_attr': {'class': 'gl-label'}}) }}
+                                {{ form_widget(form.telephone, { 'attr': { 'placeholder': 'Numero de Telephone', 'class':'input-text input-text--primary-style'} } ) }}
+                                <div class="u-s-m-b-30">
+                                    {{ form_errors(form.password) }}
+                                    {{ form_label(form.password, 'Mot De Passe*', {'label_attr': {'class': 'gl-label'}}) }}
+                                    {{ form_widget(form.password, { 'attr': { 'placeholder': 'Mot de Passe', 'class':'input-text input-text--primary-style'} } ) }}
+                                </div>
+                                <div class="u-s-m-b-30">
+                                    {{ form_errors(form.confirm_password) }}
+                                    {{ form_label(form.confirm_password, 'Confirmer Mot De Passe*', {'label_attr': {'class': 'gl-label'}}) }}
+                                    {{ form_widget(form.confirm_password, { 'attr': { 'placeholder': 'Mot de Passe', 'class':'input-text input-text--primary-style'} } ) }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+ </div>
+    <button class="btn btn--e-brand-b-2">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,33 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+
+
+<div class="card-body">
+    <div class="form-body">
+
+        <hr>
+
+            <div class="form-group has-danger">
+                {{ form_errors(form.titre) }}
+                {{ form_label(form.titre, 'Titre*', {'label_attr': {'class': 'gl-label'}}) }}
+                {{ form_widget(form.titre, { 'attr': { 'placeholder': 'Titre...', 'class':'form-control form-control-danger'} } ) }}
+            </div>
+
+            <div class="form-group has-danger">
+                {{ form_errors(form.description) }}
+                {{ form_label(form.description, 'Description*', {'label_attr': {'class': 'gl-label'}}) }}
+                {{ form_widget(form.description, { 'attr': { 'placeholder': 'description...', 'class':'form-control form-control'} } ) }}
+            </div>
+
+        <div class="form-group has-danger">
+            {{ form_errors(form.lien) }}
+            {{ form_label(form.lien, 'Lien*', {'label_attr': {'class': 'gl-label'}}) }}
+            {{ form_widget(form.lien, { 'attr': { 'placeholder': 'Lien...', 'class':'form-control form-control'} } ) }}
+        </div>
+
+
+    </div>
+</div>
+    <button class="btn btn-info d-none d-lg-block m-l-15">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

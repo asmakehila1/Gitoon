@@ -1,0 +1,39 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Temoin index{% endblock %}
+
+{% block body %}
+    <h1>Temoin index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Lien</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for temoin in temoins %}
+            <tr>
+                <td>{{ temoin.id }}</td>
+                <td>{{ temoin.titre }}</td>
+                <td>{{ temoin.description }}</td>
+                <td>{{ temoin.lien }}</td>
+                <td>
+                    <a href="{{ path('temoin_show', {'id': temoin.id}) }}">show</a>
+                    <a href="{{ path('temoin_edit', {'id': temoin.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('temoin_new') }}">Create new</a>
+{% endblock %}

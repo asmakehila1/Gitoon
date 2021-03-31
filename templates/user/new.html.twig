@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <!--====== Section Content ======-->
+    <div class="section__content">
+        <div class="container">
+            <div class="row row--center">
+                <div class="col-lg-6 col-md-8 u-s-m-b-30">
+                    <div class="l-f-o">
+                        <div class="l-f-o__pad-box">
+                            <h1 class="gl-h1">PERSONAL INFORMATION</h1>
+                                <div class="gl-s-api">
+                                    <div class="u-s-m-b-15">
+
+                                        <button class="gl-s-api__btn gl-s-api__btn--fb" type="button"><i class="fab fa-facebook-f"></i>
+
+                                            <span>Signup with Facebook</span></button></div>
+                                    <div class="u-s-m-b-30">
+
+                                        <button class="gl-s-api__btn gl-s-api__btn--gplus" type="button"><i class="fab fa-google"></i>
+
+                                            <span>Signup with Google</span></button></div>
+                                </div>
+                                <div class="u-s-m-b-30">
+
+                                        {{ form_start(form) }}
+                                    <div class="u-s-m-b-30">
+                                        {{ form_label(form.nom, 'Nom*', {'label_attr': {'class': 'gl-label'}}) }}
+                                        {{ form_widget(form.nom, { 'attr': { 'placeholder': 'Nom...', 'class':'input-text input-text--primary-style'} } ) }}
+                                    </div>
+                                    <div class="u-s-m-b-30">
+                                        {{ form_label(form.prenom, 'Prenom*', {'label_attr': {'class': 'gl-label'}}) }}
+                                        {{ form_widget(form.prenom, { 'attr': { 'placeholder': 'Prenom...', 'class':'input-text input-text--primary-style'} } ) }}
+                                    </div>
+                                    <div class="u-s-m-b-30">
+                                        {{ form_label(form.mail, 'Adresse Mail*', {'label_attr': {'class': 'gl-label'}}) }}
+                                        {{ form_widget(form.mail, { 'attr': { 'placeholder': 'Adresse Mail', 'class':'input-text input-text--primary-style'} } ) }}
+                                    </div>
+                                    <div class="u-s-m-b-30">
+                                        {{ form_label(form.adresse, 'Adresse*', {'label_attr': {'class': 'gl-label'}}) }}
+                                        {{ form_widget(form.adresse, { 'attr': { 'placeholder': 'Adresse', 'class':'input-text input-text--primary-style'} } ) }}
+                                    </div>
+                                    <div class="u-s-m-b-30">
+                                        {{ form_label(form.telephone, 'Telephone*', {'label_attr': {'class': 'gl-label'}}) }}
+                                        {{ form_widget(form.telephone, { 'attr': { 'placeholder': 'Numero de Telephone', 'class':'input-text input-text--primary-style'} } ) }}
+                                    </div>
+                                    <div class="u-s-m-b-30">
+                                        {{ form_label(form.password, 'Mot De Passe*', {'label_attr': {'class': 'gl-label'}}) }}
+                                        {{ form_widget(form.password, { 'attr': { 'placeholder': 'Mot de Passe', 'class':'input-text input-text--primary-style'} } ) }}
+                                    </div>
+                                    <div class="u-s-m-b-30">
+                                        {{ form_label(form.confirm_password, 'Confirmer Mot De Passe*', {'label_attr': {'class': 'gl-label'}}) }}
+                                        {{ form_widget(form.confirm_password, { 'attr': { 'placeholder': 'Mot de Passe', 'class':'input-text input-text--primary-style'} } ) }}
+                                    </div>
+                                       <button type="submit" class="btn btn--e-transparent-brand-b-2">Inscription</button>
+
+                                    {{ form_end(form) }}
+                                </div>
+
+                            <a class="gl-link" href="#">Return to Store</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====== End - Section Content ======-->
+{% endblock %}

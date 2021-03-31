@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Centre{% endblock %}
+
+{% block body %}
+
+
+    <!--====== Tab 1 ======-->
+    <div class="tab-pane" id="e-l-p">
+        <div class="slider-fouc">
+            <div class="owl-carousel tab-slider" data-item="4">
+                {% for temoin in temoins %}
+                    <div class="u-s-m-b-30">
+                        <div class="product-o product-o--hover-on">
+
+
+
+                            <span class="product-o__name">
+
+                                                            <a href="{{ path('temoin_showfront', { 'id':  temoin.id }) }}">{{ temoin.titre }}</a></span>
+                            <div class="product-o__rating gl-rating-style"><i class="far fa-star"></i><i
+                                        class="far fa-star"></i><i
+                                        class="far fa-star"></i><i class="far fa-star"></i><i
+                                        class="far fa-star"></i>
+
+                                <span class="product-o__review">(0)</span></div>
+
+                            <span class="product-o__price">{{ temoin.description }}
+
+                                                            <span class="product-o__price">{{ temoin.lien }}</span></span>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

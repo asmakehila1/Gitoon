@@ -1,0 +1,14 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Edit Temoin{% endblock %}
+
+{% block body %}
+    <h1>Edit Temoin</h1>
+    <div class="form-control">
+    {{ include('temoin/_form.html.twig', {'button_label': 'Update','class':'btn btn-success waves-effect waves-light m-r-10"'}) }}
+        <br>
+    {{ include('temoin/_delete_form.html.twig', {'button_label': 'delete','class':'btn btn-inverse waves-effect waves-light'}) }}
+    <br>
+        <a href="{{ path('temoin_index') }}">back to list</a>
+    </div>
+{% endblock %}

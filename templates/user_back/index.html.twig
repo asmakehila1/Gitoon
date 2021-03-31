@@ -1,0 +1,48 @@
+{% extends 'baseback.html.twig' %}
+
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>User index</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Mail</th>
+            <th>Adresse</th>
+            <th>Telephone</th>
+            <th>Password</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.mail }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.telephone }}</td>
+                <td>{{ user.password }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_delete_admin', {'id': user.id}) }}">delete</a>
+                    {{ include('user/_delete_formback.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
+

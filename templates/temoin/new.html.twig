@@ -1,0 +1,11 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}New Temoin{% endblock %}
+
+{% block body %}
+    <h1>Ajouter nouveau Temoignage</h1>
+
+    {{ include('temoin/_form.html.twig') }}
+
+    <a href="{{ path('temoin_index') }}">back to list</a>
+{% endblock %}
