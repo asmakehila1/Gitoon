@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        mid {
+            text-align: center;
+            padding: 15px;
+
+        }
+
+        tr:nth-child(even){background-color: #f2f2f2}
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1> Liste des reservation</h1>
+<table class="table product-overview" id="myTable">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Client</th>
+        <th>Centre</th>
+        <th>Evenement</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.id }}</td>
+            <td>{{ reservation.Client.nom }}</td>
+            <td>{{ reservation.Centre.nomCentre }}</td>
+            <td>{{ reservation.Evenement.descrptionEvent }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">Pas de reservation !</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+
+</body>
+</html>
+
+

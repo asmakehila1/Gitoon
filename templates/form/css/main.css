@@ -718,6 +718,7 @@ textarea.input100 {
   display: none;
 }
 
+
 @media (max-width: 576px) {
   .wrap-contact100-form-range {
     padding: 20px 0px 57px 0px;
@@ -727,3 +728,4 @@ textarea.input100 {
     padding: 15px 0px 0 0px;
   }
 }
+

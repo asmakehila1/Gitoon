@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    <h1>Evenement index</h1>
+
+    <table class="dash__table-2">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prix_event</th>
+                <th>Descrption_event</th>
+                <th>Photo_event</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.id }}</td>
+                <td>{{ evenement.prixEvent }}</td>
+                <td>{{ evenement.descrptionEvent }}</td>
+                <td><img src="{{ asset('uploads/')~evenement.photoEvent }}" style="width: 100px;height: 100px"></td>
+                <td>
+                    <a href="{{ path('evenement_afficher', {'id': evenement.id}) }}">show</a>
+                    <a href="{{ path('evenement_modifier', {'id': evenement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('evenement_nouveau') }}">Create new</a>
+{% endblock %}

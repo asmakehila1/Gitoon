@@ -1,0 +1,190 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <h1>Détails de centre:{{ centre.nomCentre }}</h1>
+
+
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    =
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            <div class="white-box text-center" ><img src="{{ asset('uploads/')~centre.photoCentre }}"
+                              style="width:500px;height:500px;" class="img-responsive"></div>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7">
+                            <h4 class="box-title m-t-40">centre description</h4>
+                            <p>{{ centre.descriptionCentre }}</p>
+                            <h2 class="m-t-40">{{ centre.prixCentre }}<small class="text-success"> DT</small></h2>
+                            <div class="col-md-7 col-sm-7">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <h3 class="box-title m-t-40">Informations Générales</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                            <tr>
+                                                <th>Nom centre</th>
+                                                <td>{{ centre.nomCentre }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Rating</th>
+                                                <td>
+                                                    <div class="pc-meta">
+                                                        <div class="rating" id="#rat">
+                                                            {% if is_granted('ROLE_USER') %}
+
+                                                                {% for i in 1.. rat %}
+                                                                    <i class="fa fa-star" width="20px"
+                                                                       data-index="{{ i }}"
+                                                                       onclick="rating({{ i }}, {{ centre.id }})"></i>
+                                                                {% endfor %}
+                                                                {% if  rat  < 5 %}
+                                                                    {% for i in rat..4 %}
+                                                                        <i class="fa fa-star" aria-hidden="true"
+                                                                           style="color: white" data-index="{{ i }}"
+                                                                           onclick="rating({{ i+1 }},{{ centre.id }})"
+                                                                           width="20px"></i>
+                                                                    {% endfor %}
+                                                                {% endif %}
+                                                            {% else %}
+                                                                {% for i in 1..rat %}
+                                                                    <i class="fa fa-star" width="20px"></i>
+                                                                {% endfor %}
+                                                                {% if rat < 5 %}
+                                                                    {% for i in rat..4 %}
+                                                                        <i class="fa fa-star" width="20px"></i>
+                                                                    {% endfor %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <script>
+
+                                                        var rateIndex = -1;
+                                                        $(document).ready(function(){
+                                                            $('.fa-star').on('click', function(){
+                                                                rateIndex = parseInt($(this).data('index'));
+                                                            });
+                                                            $('.fa-star').mouseover(function(){
+                                                                resetStarColors();
+                                                                var currentIndex = parseInt($(this).data('index'));
+                                                                for (var i=0; i <= currentIndex; i++)
+                                                                {
+                                                                    $('.fa-star:eq('+i+')').css('color', 'yellow');
+                                                                }
+
+                                                            });
+                                                            $('.fa-star').mouseleave(function(){
+                                                                if(rateIndex = -1)
+                                                                {
+                                                                    for (var i=0; i <= currentIndex; i++)
+                                                                    {
+                                                                        $('.fa-star:eq('+i+')').css('color', 'yellow');
+                                                                    }
+                                                                }
+
+                                                            });
+                                                        });
+                                                        function resetStarColors(){
+                                                            $('.fa-star').css('color', 'white');
+                                                        }
+
+                                                    </script>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Owner</th>
+                                                <td>{{ centre.owner }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Adresse</th>
+                                                <td>{{ centre.adresse }}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Activité</th>
+                                                    {% for centre in centre.activites %}
+                                                    <td>
+                                                        {{ centre.DescreptionActivite }}
+                                                    </td>
+
+                                            {% else %}
+
+                                            {% endfor %}
+                                            </tr>
+
+                                            <tr>
+                                                <td>commentaires</td>
+                                            </tr>
+                                            {% for centre in centre.centreComments %}
+                                                <tr>
+                                                    <td>
+                                                        {{ centre.user.username }} :
+                                                        {{ centre.contenu }}
+                                                    </td>
+                                                </tr>
+                                            {% else %}
+
+                                            {% endfor %}
+
+                                            <tr>
+                                                <td>
+                                                    Commentaire : <input type="text" name="contenu" id="contenu">
+                                                    <input type="hidden" value="{{ centre.id }}" name="id">
+                                                    <button id="btn" onclick="myF({{ centre.id }})">
+                                                        Commenter
+                                                    </button>
+                                                    <script>
+                                                        function myF(id) {
+                                                            $.get("http://localhost:8000/admin/centre/newComment?id=" + id + "&contenu=" + document.getElementById("contenu").value, function (data) {
+                                                                location.reload();
+                                                            });
+
+                                                        }
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div>
+                                            <a href="{{ path('reservation_newF') }}">Reserver Centre</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function rating(pos, id) {
+            $.ajax({
+                type: "GET",
+                url: "{{ path('centre_rating') }}",
+                data: {
+                    'rat': pos,
+                    'id': id
+                },
+                success: function () {
+                    alert("done");
+
+                }
+            });
+
+        }
+
+    </script>
+
+{% endblock %}
+

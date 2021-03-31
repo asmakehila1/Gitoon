@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Centre{% endblock %}
+
+{% block body %}
+
+
+            <!--====== Tab 1 ======-->
+            <div class="tab-pane" id="e-l-p">
+                <div class="slider-fouc">
+                    <div class="owl-carousel tab-slider" data-item="4">
+                        {% for centre in centres %}
+                            <div class="u-s-m-b-30">
+                                <div class="product-o product-o--hover-on">
+                                    <div class="product-o__wrap">
+
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block"
+                                           href="product-detail.html">
+
+                                            <img class="aspect__img" src="{{ asset('uploads/')~centre.PhotoCentre }}"
+                                                 alt=""></a>
+                                        <div class="product-o__action-wrap">
+                                        </div>
+                                    </div>
+
+                                    <span class="product-o__name">
+
+                                                            <a href="{{ path('centre_afficher', { 'id':  centre.id }) }}">{{ centre.nomCentre }}</a></span>
+                                    <div class="product-o__rating gl-rating-style"><i class="far fa-star"></i><i
+                                                class="far fa-star"></i><i
+                                                class="far fa-star"></i><i class="far fa-star"></i><i
+                                                class="far fa-star"></i>
+
+                                        <span class="product-o__review">(0)</span></div>
+
+                                    <span class="product-o__price">{{ centre.owner }}
+
+                                                            <span class="product-o__price">{{ centre.prixCentre }}</span></span>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock %}

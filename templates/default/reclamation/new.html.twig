@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <h1>Create new Reclamation</h1>
+    <form class="l-f" method="post"  enctype="multipart/form-data">
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+
+
+    {{ form_end(form) }}
+    <a href="{{ path('reclamations') }}">back to list</a>
+{% endblock %}

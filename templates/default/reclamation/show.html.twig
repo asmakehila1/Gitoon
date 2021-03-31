@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<h1>Liste des Réclamations</h1>
+<div class="card">
+    <div class="card-body">
+        <table>
+        <tr>
+            <td>Type</td>
+            <td>Objet</td>
+            <td>Description</td>
+            <td>Image</td>
+
+        </tr>
+        <tr>
+            <td>{{ reclamation.typeReclamation }}</td>
+            <td>{{ reclamation.objetReclamation }}</td>
+            <td>{{ reclamation.descriptionReclamation }}</td>
+            <td>{{ reclamation.imageReclamation }}</td>
+        </tr>
+        </table>
+        </div>
+</div>
+
+        <a href="{{ path('reclamations') }}">back to list</a>
+
+        {% endblock %}

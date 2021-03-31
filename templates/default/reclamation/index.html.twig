@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Liste de vos Réclamations</h1>
+    <div class="card">
+        <div class="card-body">
+            <table class="dash__table-2" >
+
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Objet</th>
+                    <th>Description</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for reclamation in reclamations %}
+                    <tr>
+                        <td>{{ reclamation.typeReclamation }}</td>
+                        <td>{{ reclamation.objetReclamation }}</td>
+                        <td>{{ reclamation.descriptionReclamation }}</td>
+                        <td>
+                            {{ include('reclamation/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">pas de réclamations</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('reclamation_nouveau') }}" type="button" class="btn btn-info "><i
+                        class="fa fa-plus-circle"></i> Ajouter une reclamation</a>
+            <a href="{{ path('genrPdf') }}" type="button" class="btn btn-success"><i
+                        class="fa fa-check"></i>  Telecharger Pdf </a>
+        </div>
+    </div>
+{% endblock %}

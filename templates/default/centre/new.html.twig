@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Ajouter un centre</h1>
+
+
+                    <form class="l-f" method="post"  enctype="multipart/form-data">
+                        {{ form_start(form) }}
+
+                        <div class="gl-s-api">
+                            <label for="adr"  class="gl-label">nom de centre</label>
+                            <input  class="input-text input-text--primary-style" type="text" name="nom_centre" minlength="4" maxlength="50" required>
+                        </div>
+                        <div class="gl-s-api ">
+                            <label for="desc"  class="gl-label">description de centre</label>
+                            <textarea class="input-text input-text--primary-style"   rows="4" name="description_centre" minlength="4" maxlength="300" required ></textarea>
+                        </div>
+
+                        <div class="gl-s-api ">
+                            <label for="adr"  class="gl-label">Owner </label>
+                            <input class="input-text input-text--primary-style" type="text" name="owner" minlength="4" maxlength="50" required>
+                        </div>
+                        <div class="gl-s-api ">
+                            <label for="adr"  class="gl-label">Addresse</label>
+                            <input class="input-text input-text--primary-style" type="text" id="adr" name="address" minlength="4" maxlength="50" required>
+                        </div>
+
+                        <div class="gl-s-api">
+                            <label for="pr" class="gl-label">prix centre</label>
+                            <input class="input-text input-text--primary-style" type="number" min="1" minlength="1" maxlength="5" id="pr" name="prix_centre" required>
+                        </div>
+                        <div class="gl-s-api ">
+
+                            <label for="ph" class="gl-label">Photo</label>
+                            <input type="file" id="ph" class="dropify" data-show-remove="false" name="photo_centre" accept="image/x-png,image/gif,image/jpeg" required/>
+
+                        </div>
+                        <div class="gl-s-api ">
+
+                        <button type="submit" class="btn btn--e-transparent-brand-b-2"> <i class="fa fa-check"></i>Ajouter</button>
+                        <a type="button" class="btn btn-secondary" href="{{ path('centres') }}">Annuler</a>
+
+                        </div>
+
+                        {{ form_end (form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <a href="{{ path('centres') }}">back to list</a>
+{% endblock %}

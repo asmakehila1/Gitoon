@@ -59,10 +59,38 @@ class Centre
      */
     private $reservations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CentreComment::class, mappedBy="centre")
+     */
+    private $centreComments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="centre")
+     */
+    private $ratings;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="centres")
+     */
+    private $User;
+
+
+
+    /**
+     * Transform to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
     public function __construct()
     {
         $this->activites = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->centreComments = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,6 +227,78 @@ class Centre
                 $reservation->setCentre(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CentreComment[]
+     */
+    public function getCentreComments(): Collection
+    {
+        return $this->centreComments;
+    }
+
+    public function addCentreComment(CentreComment $centreComment): self
+    {
+        if (!$this->centreComments->contains($centreComment)) {
+            $this->centreComments[] = $centreComment;
+            $centreComment->setCentre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCentreComment(CentreComment $centreComment): self
+    {
+        if ($this->centreComments->removeElement($centreComment)) {
+            // set the owning side to null (unless already changed)
+            if ($centreComment->getCentre() === $this) {
+                $centreComment->setCentre(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rating[]
+     */
+    public function getRatings(): Collection
+    {
+        return $this->ratings;
+    }
+
+    public function addRating(Rating $rating): self
+    {
+        if (!$this->ratings->contains($rating)) {
+            $this->ratings[] = $rating;
+            $rating->setCentre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRating(Rating $rating): self
+    {
+        if ($this->ratings->removeElement($rating)) {
+            // set the owning side to null (unless already changed)
+            if ($rating->getCentre() === $this) {
+                $rating->setCentre(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }

@@ -19,7 +19,7 @@ class PubliciteController extends AbstractController
     /**
      * @Route("/generatePdf", name="generatePdf", methods={"GET"})
      */
-    public function generatePdf(PubliciteRepository $publiciteRepository): Response
+    public function generatePdf(PubliciteRepository $publiciteRepository) : String
     {
             // instantiate and use the dompdf class
         $dompdf = new Dompdf();

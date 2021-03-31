@@ -68,37 +68,23 @@ class Client
      */
     private $reclamations;
 
+
+
+
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="client")
+     * Transform to string
+     *
+     * @return string
      */
-    private $participations;
-
-
-
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
     public function __construct()
     {
-        $this->participations = new ArrayCollection();
         $this->reservations = new ArrayCollection();
         $this->reclamations = new ArrayCollection();
     }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getParticipations(): ArrayCollection
-    {
-        return $this->participations;
-    }
-
-    /**
-     * @param ArrayCollection $participations
-     */
-    public function setParticipations(ArrayCollection $participations): void
-    {
-        $this->participations = $participations;
-    }
-
-
 
 
     public function getIdClient(): ?int
@@ -249,11 +235,5 @@ class Client
         }
 
         return $this;
-    }
-
-
-    public function __toString()
-    {
-        return $this->getNom();
     }
 }

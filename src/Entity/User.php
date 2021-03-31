@@ -3,18 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
- * @UniqueEntity(
- *      fields={"mail"},
- *      message="L'émail que vous avez tapé est déjà utilisé !"
- * )
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -26,122 +23,95 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $nom;
+    private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="json")
      */
-    private $prenom;
+    private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $mail;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $adresse;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $telephone;
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     * min = 8,
-     * minMessage = "Votre mot de passe doit comporter au minimum {{ limit }} caractères")
-     * * @Assert\EqualTo(propertyPath = "confirm_password",
-     * message="Vous n'avez pas saisi le même mot de passe !" )
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
 
     /**
-     * @Assert\EqualTo(propertyPath = "password",
-     * message="Vous n'avez pas saisi le même mot de passe !" )
+     * @ORM\OneToMany(targetEntity=CentreComment::class, mappedBy="user")
      */
+    private $centreComments;
 
-    private $confirm_password;
-    public function getConfirmPassword()
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="Client")
+     */
+    private $reservations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Centre::class, mappedBy="User")
+     */
+    private $centres;
+
+    public function __construct()
     {
-        return $this->confirm_password;
+        $this->centreComments = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
+        $this->centres = new ArrayCollection();
     }
-    public function setConfirmPassword($confirm_password)
-    {
-        $this->confirm_password = $confirm_password;
-        return $this;
-    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getEmail(): ?string
     {
-        return $this->nom;
+        return $this->email;
     }
 
-    public function setNom(?string $nom): self
+    public function setEmail(string $email): self
     {
-        $this->nom = $nom;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->prenom;
+        return (string) $this->email;
     }
 
-    public function setPrenom(string $prenom): self
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->prenom = $prenom;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getMail(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
     {
-        return $this->mail;
-    }
-
-    public function setMail(string $mail): self
-    {
-        $this->mail = $mail;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(string $telephone): self
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
@@ -151,23 +121,113 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRoles()
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
     {
-        return ['ROLE_USER'];
+        return null;
     }
 
-    public function getSalt()
-    {
-        // TODO: Implement getSalt() method.
-    }
-
-    public function getUsername()
-    {
-        return $this->getmail();
-    }
-
+    /**
+     * @see UserInterface
+     */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|CentreComment[]
+     */
+    public function getCentreComments(): Collection
+    {
+        return $this->centreComments;
+    }
+
+    public function addCentreComment(CentreComment $centreComment): self
+    {
+        if (!$this->centreComments->contains($centreComment)) {
+            $this->centreComments[] = $centreComment;
+            $centreComment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCentreComment(CentreComment $centreComment): self
+    {
+        if ($this->centreComments->removeElement($centreComment)) {
+            // set the owning side to null (unless already changed)
+            if ($centreComment->getUser() === $this) {
+                $centreComment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getClient() === $this) {
+                $reservation->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Centre[]
+     */
+    public function getCentres(): Collection
+    {
+        return $this->centres;
+    }
+
+    public function addCentre(Centre $centre): self
+    {
+        if (!$this->centres->contains($centre)) {
+            $this->centres[] = $centre;
+            $centre->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCentre(Centre $centre): self
+    {
+        if ($this->centres->removeElement($centre)) {
+            // set the owning side to null (unless already changed)
+            if ($centre->getUser() === $this) {
+                $centre->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
