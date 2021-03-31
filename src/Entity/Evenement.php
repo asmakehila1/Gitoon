@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass=EvenementRepository::class)
  */
@@ -24,6 +25,7 @@ class Evenement extends AbstractController
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Positive(message="Please Enter Valid Price")
      */
     private $prix_event;
 
