@@ -29,7 +29,7 @@ class Promotion
     private $desc_promo;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="string", length=200)
      */
     private $image_promo;
 
@@ -37,6 +37,48 @@ class Promotion
      * @ORM\Column(type="string", length=255)
      */
     private $type_promo;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $prix_ancien;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $prix_nv;
+
+    /**
+     * @return mixed
+     */
+    public function getPrixAncien()
+    {
+        return $this->prix_ancien;
+    }
+
+    /**
+     * @param mixed $prix_ancien
+     */
+    public function setPrixAncien($prix_ancien): void
+    {
+        $this->prix_ancien = $prix_ancien;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrixNv()
+    {
+        return $this->prix_nv;
+    }
+
+    /**
+     * @param mixed $prix_nv
+     */
+    public function setPrixNv($prix_nv): void
+    {
+        $this->prix_nv = $prix_nv;
+    }
 
     /**
      * @return mixed

@@ -30,7 +30,20 @@ class PromotionRepository extends ServiceEntityRepository
 
     }
 
-
+public function orderByPriceNew(){
+        return $this->createQueryBuilder('p')
+            ->select('*')
+            ->orderBy('p.prix_nv')
+            ->getQuery()
+            ->getResult() ;
+}
+    public function orderByPriceOld(){
+        return $this->createQueryBuilder('p')
+            ->select('*')
+            ->orderBy('p.prix_ancien')
+            ->getQuery()
+            ->getResult() ;
+    }
     // /**
     //  * @return Promotion[] Returns an array of Promotion objects
     //  */

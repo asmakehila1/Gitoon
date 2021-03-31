@@ -1,24 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Promotion{% endblock %}
+
 {% block slider %}
     <!--====== Primary Slider ======-->
     <div class="s-skeleton s-skeleton--h-600 s-skeleton--bg-grey">
         <div class="owl-carousel primary-style-1" id="hero-slider">
             {% for publicite in publicites %}
-            <div class="hero-slide hero-slide--1">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="slider-content slider-content--animation">
-                                <img class="aspect__img" src="{{ asset('uploads/') ~ publicite.imagePub}}" alt="{{ publicite.imagePub}}" width="1920" height="900">
-                                <span class="content-span-1 u-c-secondary">{{ publicite.titrePub }}</span>
-                                <span class="content-span-3 u-c-secondary">{{ publicite.descriptionPub }}</span>
-                                <a class="shop-now-link btn--e-brand" href="shop-side-version-2.html">{{ publicite.imagePub}}</a></div>
+                <div class="hero-slide hero-slide--1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="slider-content slider-content--animation">
+                                    <img class="aspect__img" src="{{ asset('uploads/') ~ publicite.imagePub}}" alt="{{ publicite.imagePub}}" width="1920" height="900"/>
+                                    <span class="content-span-1 u-c-secondary">{{ publicite.titrePub }}</span>
+                                    <span class="content-span-3 u-c-secondary">{{ publicite.descriptionPub }}</span>
+                                    <a class="shop-now-link btn--e-brand" href="shop-side-version-2.html">{{ publicite.imagePub}}</a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
@@ -54,22 +55,15 @@
                         </div>
                     </div>
 
-                    <span class="product-o__category">
+                    <span class="product-o__category">                        <a href="shop-side-version-2.html">{{ promotion.typePromo }}</a></span>
 
-                                                    <a href="shop-side-version-2.html">{{ promotion.typePromo }}</a></span>
-
-                    <span class="product-o__name">
-
-                                                    <a href="product-detail.html">{{ promotion.titrePromo }}</a></span>
+                    <span class="product-o__name">                                                    <a href="product-detail.html">{{ promotion.titrePromo }}</a></span>
                     <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
 
-                        <span class="product-o__review">(23)</span></div>
-                    <span class="product-o__category">
-
-                                                    <a href="shop-side-version-2.html">{{ promotion.descPromo }}</a></span>
-                    <span class="product-o__price">$125.00
-
-                                                    <span class="product-o__discount">$160.00</span></span>
+                        <span class="product-o__review">(23)</span>
+                    </div>
+                    <span class="product-o__category">                                                    <a href="shop-side-version-2.html">{{ promotion.descPromo }}</a></span>
+                    <span class="product-o__price">{{ promotion.prixNv }}<span class="product-o__discount">{{ promotion.prixAncien }}</span></span>
                 </div>
             </div>
             {% endfor %}
@@ -116,7 +110,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 

@@ -29,7 +29,7 @@ class Publicite
     private $description_pub;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="string", length=200)
      */
     private $image_pub;
 

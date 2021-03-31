@@ -27,6 +27,8 @@
                                 <th>Titre_promo</th>
                                 <th>Description_promo</th>
                                 <th>Type_promo</th>
+                                <th>Prix An</th>
+                                <th>Prix Nv</th>
                                 <th>Image_promo</th>
                                 <th>Actions</th>
                             </tr>
@@ -38,7 +40,9 @@
                                     <td>{{ promotion.titrePromo }}</td>
                                     <td>{{ promotion.descPromo }}</td>
                                     <td>{{ promotion.typePromo }}</td>
-                                    <td><img src="{{ asset('uploads/')~promotion.imagePromo}}" alt="imgpromo" ></td>
+                                    <td>{{ promotion.prixAncien }}</td>
+                                    <td>{{ promotion.prixNv }}</td>
+                                    <td><img src="{{ asset('uploads/')~promotion.imagePromo}}" alt="imgpromo" width="96" height="96"></td>
                                     <td><a href="{{ path('promotion_show', { 'id':  promotion.id }) }}"
                                            title="Afficher" data-toggle="tooltip"><i class="ti-eye"></i></a>
                                         <a href="{{ path('promotion_edit', { 'id':  promotion.id }) }}"

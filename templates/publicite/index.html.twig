@@ -43,7 +43,7 @@
                                     <td>{{ publicite.id }}</td>
                                     <td>{{ publicite.titrePub }}</td>
                                     <td>{{ publicite.descriptionPub }}</td>
-                                    <td><img src="{{ asset('uploads/')~publicite.imagePub }}" alt="imgpub" ></td>
+                                    <td><img src="{{ asset('uploads/')~publicite.imagePub }}" alt="imgpub" width="96" height="96"></td>
                                     <!-- CHECK IMAGE BUG -->
                                     <td><a href="{{ path('publicite_show', { 'id':  publicite.id }) }}"
                                            title="Afficher" data-toggle="tooltip"><i class="ti-eye"></i></a>

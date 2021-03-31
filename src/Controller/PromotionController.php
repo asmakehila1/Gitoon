@@ -53,6 +53,8 @@ class PromotionController extends AbstractController
             $promotion->setTitrePromo($request->get('titre_promo'));
             $promotion->setDescPromo($request->get('description_promo'));
             $promotion->setTypePromo($request->get('type_promo'));
+            $promotion->setPrixAncien($request->get('prix_ancien'));
+            $promotion->setPrixNv($request->get('prix_nv'));
             $fich = $request->files->get('image_promo');
             $new_name = rand() . '.' . $fich->getClientOriginalExtension();
             $fich->move('uploads/', $new_name);
@@ -94,7 +96,12 @@ class PromotionController extends AbstractController
             $promotion->setTitrePromo($request->get('titre_promo'));
             $promotion->setDescPromo($request->get('desc_promo'));
             $promotion->setTypePromo($request->get('type_promo'));
-            $promotion->setImagePromo($request->get('image_promo'));
+            $promotion->setPrixAncien($request->get('prix_ancien'));
+            $promotion->setPrixNv($request->get('prix_nv'));
+            $fich = $request->files->get('image_promo');
+            $new_name = rand() . '.' . $fich->getClientOriginalExtension();
+            $fich->move('uploads/', $new_name);
+            $promotion->setImagePromo($new_name);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($promotion);
