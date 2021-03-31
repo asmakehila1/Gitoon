@@ -15,7 +15,6 @@ class Evenement extends AbstractController
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -32,7 +31,7 @@ class Evenement extends AbstractController
     private $descrption_event;
 
     /**
-     * @ORM\Column(type="string",length=2000)
+     * @ORM\Column(type="blob")
      */
     private $photo_event;
 
@@ -41,21 +40,6 @@ class Evenement extends AbstractController
      */
     private $reservations;
 
-
-
-
-    /**
-     * Transform to string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string) $this->getId();
-    }
-
-
-
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -63,17 +47,17 @@ class Evenement extends AbstractController
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->id_event;
     }
 
-    public function getPrixEvent(): ?float
+    public function getPrix(): ?float
     {
         return $this->prix_event;
     }
 
-    public function setPrixEvent(float $prix_event): self
+    public function setPrix(float $prix_event): self
     {
-        $this->prix_event = $prix_event;
+        $this->prix = $prix_event;
 
         return $this;
     }
@@ -90,12 +74,12 @@ class Evenement extends AbstractController
         return $this;
     }
 
-    public function getPhotoEvent():?string
+    public function getPhotoEvent()
     {
         return $this->photo_event;
     }
 
-    public function setPhotoEvent(String $photo_event): self
+    public function setPhotoEvent($photo_event): self
     {
         $this->photo_event = $photo_event;
 

@@ -2,16 +2,9 @@
 
 
 {% block body %}
-<h1>Passer une reservation</h1>
-<div class="card">
-    <div class="card-body">
+    <h1>Crée Reservation</h1>
 
-        {{ include('reservation/_form.html.twig') }}
+    {{ include('reservation/_form.html.twig') }}
 
-        <a href="{{ path('reservation_indexA') }}">Liste des reservations</a>
-
-    </div>
-</div>
-
-
+    <a href="{{ path('reservation_index') }}">retour</a>
 {% endblock %}

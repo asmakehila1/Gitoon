@@ -21,6 +21,11 @@ class Reservation
         return $this->id;
     }
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Client;
 
     /**
      * @ORM\ManyToOne(targetEntity=Centre::class, inversedBy="reservations")
@@ -37,22 +42,25 @@ class Reservation
      */
     private $Materiels;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservations")
-     */
-    private $Client;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $Qrcode;
 
 
 
+    public function getIdReservation(): ?int
+    {
+        return $this->id_reservation;
+    }
 
+    public function getClient(): ?Client
+    {
+        return $this->Client;
+    }
 
+    public function setClient(?Client $Client): self
+    {
+        $this->Client = $Client;
 
-
+        return $this;
+    }
 
     public function getCentre(): ?Centre
     {
@@ -89,32 +97,6 @@ class Reservation
 
         return $this;
     }
-
-    public function getClient(): ?User
-    {
-        return $this->Client;
-    }
-
-    public function setClient(?User $Client): self
-    {
-        $this->Client = $Client;
-
-        return $this;
-    }
-
-    public function getQrcode(): ?string
-    {
-        return $this->Qrcode;
-    }
-
-    public function setQrcode(string $Qrcode): self
-    {
-        $this->Qrcode = $Qrcode;
-
-        return $this;
-    }
-
-
 
 
 }

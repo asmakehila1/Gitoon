@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+    <h1>Lise des materiels</h1>
+    {# {% for materiel in materiels %} #}
+    {# <table> #}
+    {# <thead> #}
+    {# <th>Nom</th> #}
+    {# <th>Prix</th> #}
+    {# <th>Quantité</th> #}
+    {# <th>Dureé</th> #}
+    {# <th>status</th> #}
+    {# <th>Actions</th> #}
+    {# </thead> #}
+    {# <tbody> #}
+    {# <tr> #}
+    {# <td>{{ materiel.Nom }}</td> #}
+    {# <td>{{ materiel.prix }}</td> #}
+    {# <td>{{ materiel.quantite }}</td> #}
+    {# <td> #}
+    {# {{ materiel.dureeLocation }} #}
+    {# </td> #}
+    {# <td> #}
+    {# {% if materiel.statu == 1 %} #}
+    {# <p>Active</p> #}
+    {# {% endif %} #}
+    {# {% if materiel.statu != 1 %} #}
+    {# <p>Désactivé</p> #}
+    {# {% endif %} #}
+    {# </td> #}
+    {# <td> #}
+    {# {% if ((materiel.statu == 1) and (materiel.quantite > 0)) %} #}
+    {# <button> Commander </button> #}
+    {# {% else %} #}
+    {# <button disabled> Commander </button> #}
+
+    {# {% endif %} #}
+    {# </td> #}
+    {# </tr> #}
+    {# </tbody> #}
+    {# </table> #}
+    {# {% endfor %} #}
+
+    <div class="row is-grid-active">
+
+    {% for materiel in materiels %}
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="product-m">
+                <div class="product-m__thumb">
+                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+
+                        <img class="aspect__img" src="{{ asset('uploads/images/'~ materiel.photo) }}" alt=""></a>
+                    <div class="product-m__add-cart">
+                        {% if ((materiel.statu == 1) and (materiel.quantite > 0)) %}#}
+                        <a class="btn--e-brand" href="{{ path('add_commande', { 'id':  materiel.id }) }}">Add to
+                            Cart</a>
+                    </div>
+                    {% else %}
+                    <a class="btn--e-brand" disabled>Add to Cart</a></div>
+
+                {% endif %}
+            </div>
+            <div class="product-m__content">
+                <div class="product-m__category">
+
+                    <a href="shop-side-version-2.html">Materiel</a></div>
+                <div class="product-m__name">
+
+                    <a href="product-detail.html"> Materiel : {{ materiel.Nom }}</a></div>
+                <div class="product-m__rating gl-rating-style">
+
+                    <span class="product-m__review">Quantité: {{ materiel.quantite }}</span>
+                </div>
+                <div class="product-m__price">Prix: {{ materiel.prix }}</div>
+                <div class="product-m__price">duree: {{ materiel.dureeLocation }}</div>
+                <div class="product-m__hover">
+                    <div class="product-m__preview-description">
+
+                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span>
+                    </div>
+                    <div class="product-m__wishlist">
+
+                        <a class="far fa-heart" href="#" data-tooltip="tooltip" data-placement="top" title=""
+                           data-original-title="Add to Wishlist"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+        </div>
+
+    <div class="shop-p__pagination">
+        <li class="is-active">
+            {{ knp_pagination_render(materiels) }}
+
+        </li>
+    </div>
+
+{% endblock %}

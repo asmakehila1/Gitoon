@@ -1,13 +1,10 @@
 <?php
 
 namespace App\Controller;
-use App\Entity\CentreComment;
+
 use App\Entity\Centre;
-use App\Entity\Rating;
 use App\Form\Centre1Type;
 use App\Repository\CentreRepository;
-use App\Repository\ReservationRepository;
-use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,73 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CentreController extends AbstractController
 {
-
     /**
-     * @Route("/genrPdf", name="genrPdf", methods={"GET"})
-     */
-    public function genrPdf(CentreRepository $centreRepository): string
-    {
-        // instantiate and use the dompdf class
-        $dompdf = new Dompdf();
-        $test = $this->renderView('centre/tab.html.twig', [
-            'centres' => $centreRepository->findAll(),
-        ]);
-        $dompdf->loadHtml($test);
-
-        // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser
-        $dompdf->stream();
-        return  $test;
-
-
-    }
-
-
-
-
-
-
-    /**
-     * @Route("/Pdf", name="Pdf", methods={"GET"})
-     */
-    public function Pdf(CentreRepository $centreRepository , int $id): string
-    {
-        // instantiate and use the dompdf class
-        $dompdf = new Dompdf();
-
-        $test = $this->renderView('centre/pdf.html.twig', [
-            'centres' => $centreRepository->findoneBy($id),
-        ]);
-        $dompdf->loadHtml($test);
-
-        // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser
-        $dompdf->stream();
-        return  $test;
-
-
-    }
-    /**
-     * @Route("/centres", name="centres", methods={"GET"})
-     */
-    public function Centres(CentreRepository $centreRepository): Response
-    {
-        return $this->render('default/centre/index.html.twig', [
-            'centres' => $centreRepository->findAll(),
-        ]);
-    }
-    /**
-     * @Route("/index", name="centre_index", methods={"GET"})
+     * @Route("/", name="centre_index", methods={"GET"})
      */
     public function index(CentreRepository $centreRepository): Response
     {
@@ -92,30 +24,9 @@ class CentreController extends AbstractController
             'centres' => $centreRepository->findAll(),
         ]);
     }
-    /**
-     * @Route("/newComment", name="newComment", methods={"GET"})
-     */
-    public function newComment(Request $request,CentreRepository $centreRepository): Response
-    {
-        $centre = $centreRepository->find($request->query->get("id"));
-        $user = $this->getUser();
-        $contenu = $request->query->get("contenu");
-        $CentreComment = new CentreComment();
-        $CentreComment->setUser($user);
-        $CentreComment->setContenu($contenu);
-        $CentreComment->setCentre($centre);
-
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $entityManager->persist($CentreComment);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('centre_afficher',array('id' => $centre->getId()));
-    }
-
 
     /**
-     * @Route("/new", name="centre_newA", methods={"GET","POST"})
+     * @Route("/new", name="centre_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -139,7 +50,6 @@ class CentreController extends AbstractController
             $fich->move('uploads/', $new_name);
         
             $centre->setPhotoCentre($new_name);
-            $centre->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->persist($centre);
@@ -155,60 +65,7 @@ class CentreController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="centre_afficher", methods={"GET"})
-     */
-    public function afficherCentre(Centre $centre): Response
-    {
-        $deleteForm = $this->createDeleteForm($centre);
-        $authCheker=$this->container->get('security.authorization_checker');
-        $em=$this->getDoctrine()->getManager();
-        $existe=0;
-        $rat=1;
-        $i=1;
-        if ($authCheker->isgranted ('ROLE_USER')){
-            $userid=$this->get('security.token_storage')->getToken()->getUser()->getId();
-            $ratings=$em->getRepository(Rating::class)->findAll();
-            foreach ($ratings as $rating) {
-                if ( (($rating->getCentre()->getId()) == $centre->getId()) && (($rating->getUser()->getId()) == $userid)  ) {
-                    $existe=1;
-                    $rat=$rating->getRat();
-                }
-            }
-        }
-        if ($existe==0) {
-            $ratings = $em->getRepository(Rating::class)->findAll();
-
-            foreach ($ratings as $rating) {
-                if($rating->getCentre()->getId()==$centre->getId()){
-                    $rat=$rat+$rating->getRat();
-                    $i=$i+1;
-                }
-            }
-            $rat=$rat / $i;
-            if($rat>1 && $rat<=2){
-                $rat=2;
-            }
-            else if($rat>2 && $rat <= 3){
-                $rat=3;
-            }elseif ($rat>3 && $rat <= 4){
-                $rat=4;
-            }elseif ($rat==1)
-            {
-                $rat=1;
-            }
-            else{
-                $rat=5;
-            }
-        }
-        return $this->render('default/centre/show.html.twig', [
-            'centre' => $centre,
-            'rat'=>$rat,
-            'delete_form' => $deleteForm->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/centre/{id}", name="centre_showA", methods={"GET"})
+     * @Route("/{id}", name="centre_show", methods={"GET"})
      */
     public function show(Centre $centre): Response
     {
@@ -218,7 +75,7 @@ class CentreController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="centre_editA", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="centre_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Centre $centre): Response
     {   
@@ -252,39 +109,16 @@ class CentreController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="centre_deleteA", methods={"DELETE"})
+     * @Route("/{id}", name="centre_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Centre $centre): Response
     {
         if ($this->isCsrfTokenValid('delete'.$centre->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            foreach($centre->getRatings() as $r)
-            {
-                $entityManager->remove($r);
-            }
-            foreach($centre->getCentreComments() as $C)
-            {
-                $entityManager->remove($C);
-            }
             $entityManager->remove($centre);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('centre_index');
-    }
-    /**
-     * Creates a form to delete a centre entity.
-     *
-     * @param Centre $centre The centre entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Centre $centre)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('centre_delete', array('id' => $centre->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-            ;
     }
 }

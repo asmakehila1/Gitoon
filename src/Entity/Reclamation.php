@@ -29,7 +29,7 @@ class Reclamation
     private $objet_reclamation;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="blob", nullable=true)
      */
     private $image_reclamation;
 
@@ -39,7 +39,7 @@ class Reclamation
     private $description_reclamation;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reclamations")
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="reclamations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Client;
@@ -121,12 +121,12 @@ class Reclamation
         return $this;
     }
 
-    public function getClient(): ?User
+    public function getClient(): ?Client
     {
         return $this->Client;
     }
 
-    public function setClient(?User $Client): self
+    public function setClient(?Client $Client): self
     {
         $this->Client = $Client;
 

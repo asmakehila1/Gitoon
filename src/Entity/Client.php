@@ -67,23 +67,15 @@ class Client
      * @ORM\OneToMany(targetEntity=Reclamation::class, mappedBy="Client", orphanRemoval=true)
      */
     private $reclamations;
-
-
-
-
     /**
-     * Transform to string
-     *
-     * @return string
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="Client", orphanRemoval=true)
      */
-    public function __toString()
-    {
-        return (string) $this->getId();
-    }
+    private $commandes;
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
         $this->reclamations = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
 
@@ -231,6 +223,36 @@ class Client
             // set the owning side to null (unless already changed)
             if ($reclamation->getClient() === $this) {
                 $reclamation->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommandes(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getClient() === $this) {
+                $commande->setClient(null);
             }
         }
 

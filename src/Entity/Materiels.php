@@ -43,9 +43,11 @@ class Materiels
     private $statu;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="string", length=255)
      */
     private $photo;
+
+
 
     /**
      * @return mixed
@@ -143,21 +145,18 @@ class Materiels
         $this->statu = $statu;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPhoto()
     {
         return $this->photo;
     }
 
-    /**
-     * @param mixed $photo
-     */
-    public function setPhoto($photo): void
+    public function setPhoto( $photo)
     {
         $this->photo = $photo;
+
+        return $this;
     }
+
 
 
 }

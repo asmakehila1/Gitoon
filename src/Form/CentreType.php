@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CentreType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+{
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommandeController!{% endblock %}
+
+{% block body %}
+    <div class="u-s-p-b-60">
+
+        <!--====== Section Intro ======-->
+        <div class="section__intro u-s-m-b-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section__text-wrap">
+                            <h1 class="section__heading u-c-secondary">SHOPPING CART</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--====== End - Section Intro ======-->
+
+
+        <!--====== Section Content ======-->
+        <div class="section__content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+                        <div class="table-responsive">
+                            <table class="table-p">
+                                <tbody>
+                                {% for commande in commandes %}
+                                <tr>
+                                    <td>
+                                        <div class="table-p__box">
+                                            <div class="table-p__img-wrap">
+
+                                                <img class="u-img-fluid" src="{{ asset('uploads/images/'~ commande.photo) }}" alt=""></div>
+                                            <div class="table-p__info">
+
+                                                            <span class="table-p__name">
+
+                                                                {{ commande.nom }}</span>
+
+                                                <span class="table-p__category">
+
+                                                                <a href="shop-side-version-2.html">Description</a></span>
+                                                <ul class="table-p__variant-list">
+                                                    <li>
+
+                                                        <span>{{ commande.duree }}</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <span class="table-p__price">{{ commande.prix }} TND</span></td>
+                                    <td>
+                                        <div class="table-p__del-wrap">
+
+                                                {{ include('commande/_delete_commande_form.html.twig') }}
+                                            </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="route-box">
+                            <div class="route-box__g1">
+
+                                <a class="route-box__link" href="{{ path('materiels')}}"><i class="fas fa-long-arrow-alt-left"></i>
+
+                                    <span>CONTINUE SHOPPING</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--====== End - Section Content ======-->
+    </div>
+    <div class="section__content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+                    <form class="f-cart">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                                <div class="f-cart__pad-box">
+                                    <div class="u-s-m-b-30">
+                                        <table class="f-cart__table">
+                                            <tbody>
+                                            {% for commande in commandes %}
+
+                                            <tr>
+                                                <td>{{ commande.nom }}</td>
+                                                <td>{{ commande.prix }} TND</td>
+                                            </tr>
+                                            {% endfor %}
+                                            <tr>
+                                                <td>GRAND TOTAL</td>
+                                                <td> {% set somme = 0 %}
+                                                    {% for commande in commandes %}
+                                                        {% set somme = somme+ commande.prix %}
+                                                    {% endfor %}
+                                                    {{somme}} </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div>
+
+                                        <a class="btn btn--e-brand-b-2" type="submit" href="{{ path('pdf')}}"> Telecharger Recu  </a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

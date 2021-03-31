@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
-
+    <title>Annonces</title>
     <link href="{{ asset('assets/node_modules/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('dist/css/pages/file-upload.css') }}" rel="stylesheet">
     <link href="{{ asset('dist/css/pages/ecommerce.css') }}" rel="stylesheet">
@@ -16,19 +16,19 @@
     <link href="{{ asset('assets/node_modules/morrisjs/morris.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/node_modules/Magnific-Popup-master/dist/magnific-popup.css') }}" >
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('dist/css/pages/float-chart.css')}}" rel="stylesheet">
 
 
 </head>
 
 <body class="skin-blue fixed-layout">
+
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
 <!-- ============================================================== -->
 <div class="preloader">
     <div class="loader">
         <div class="loader__figure"></div>
-        <p class="loader__label">Gitoon</p>
+        <p class="loader__label">Baskel</p>
     </div>
 </div>
 <!-- ============================================================== -->
@@ -49,14 +49,16 @@
                         <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                         <!-- Dark Logo icon -->
 
-
+                        <img src="{{ asset('assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo" />
+                        <!-- Light Logo icon -->
+                        <img src="{{ asset('assets/images/logo-light-icon.png') }}" alt="homepage" class="light-logo" />
                     </b>
                     <!--End Logo icon -->
                     <!-- Logo text --><span>
                          <!-- dark Logo text -->
-                         <img src="{{ asset('uploads/gitoonlogo.png') }}" alt="GITOON" class="dark-logo" />
+                         <img src="{{ asset('assets/images/logo-text.png') }}" alt="homepage" class="dark-logo" />
                         <!-- Light Logo text -->
-                         <img src="{{ asset('uploads/gitoonlogo.png') }}" class="light-logo" alt="GITOON" /></span> </a>
+                         <img src="{{ asset('assets/images/logo-light-text.png') }}" class="light-logo" alt="homepage" /></span> </a>
             </div>
             <!-- ============================================================== -->
             <!-- End Logo -->
@@ -106,11 +108,28 @@
                     <!-- User Profile -->
                     <!-- ============================================================== -->
                     <li class="nav-item dropdown u-pro">
-                        <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src= "{{ asset('assets/images/users/agent2.jpg') }}" alt="user" class=""> <span class="hidden-md-down">&nbsp;<i class="fa fa-angle-down"></i></span> </a>
+                        <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src= "{{ asset('assets/images/users/1.jpg') }}" alt="user" class=""> <span class="hidden-md-down">&nbsp;<i class="fa fa-angle-down"></i></span> </a>
                         <div class="dropdown-menu dropdown-menu-right animated flipInY">
                             <!-- text-->
-                            <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> Mon Profil</a>
+                            <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                            <!-- text-->
+                            <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
+                            <!-- text-->
+                            <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+
+                            <!-- text-->
+                            <div class="dropdown-divider"></div>
+                            <!-- text-->
+                            <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                            <!-- text-->
+
+
+
                             </a>
+                            <div class="dropdown-divider"></div>
+                            <!-- text-->
+                            <a ><i class="fa fa-power-off"></i></a>
+                            <!-- text-->
                         </div>
                     </li>
 
@@ -137,20 +156,18 @@
                 <ul id="sidebarnav">
 
 
-                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-layout-grid2"></i><span class="hide-menu">Gitoon</span></a>
+                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-layout-grid2"></i><span class="hide-menu">Centre</span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{{ path('centre_index') }}">Centre</a></li>
-                            <li><a href="{{ path('reclamation_index') }}">Reclamation</a></li>
-                            <li><a href="{{ path('reservation_indexA') }}">Reservation</a></li>
+                                                       <li><a href="{{ path('reclamation_index') }}">Reclamation</a></li>
+                            <li><a href="{{ path('reservation_index') }}">Reservation</a></li>
+
                             <li><a href="{{ path('activite_index') }}">Activite</a></li>
-                            <li><a href="{{ path('publicite_index') }}">Publicite</a></li>
-                            <li><a href="{{ path('promotion_index') }}">Promotion</a></li>
-                            <li><a href="{{ path('evenement_indexA') }}">evenement</a></li>
+
 
                         </ul>
                     </li>
-
-
+                    
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->
@@ -256,12 +273,6 @@
 <script src="{{ asset('assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ asset('assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup-init.js') }}"></script>
 
-<script src="{{ asset('assets/node_modules/flot/excanvas.js') }}"></script>
-<script src="{{ asset('assets/node_modules/flot/jquery.flot.js') }}"></script>
-<script src="{{ asset('assets/node_modules/flot/jquery.flot.pie.js') }}"></script>
-
-<script src="{{ asset('assets/node_modules/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
-
 
 
 
@@ -358,11 +369,8 @@
     });
 </script>
 
-
-{% block custom_script %}
-{% endblock %}
-
-
 </body>
 </html>
+
+
 

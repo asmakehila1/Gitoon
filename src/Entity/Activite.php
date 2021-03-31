@@ -34,8 +34,6 @@ class Activite
     private $Centre;
 
 
-
-
     public function getIdActivite() : ?int
     {
         return $this->id_activite;
