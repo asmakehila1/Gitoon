@@ -31,18 +31,18 @@
     <div class="filter-category-container">
         <div class="filter__category-wrapper">
 
-            <a class="btn filter__btn filter__btn--style-1 js-checked" type="button" href="{{ path('promotion_front_index') }}">ALL</a></div>
+            <a class="btn filter__btn filter__btn--style-1 js-checked" type="button" href="{{ path('promotion_front_index') }}">Tous</a></div>
         <div class="filter__category-wrapper">
 
-            <a class="btn filter__btn filter__btn--style-1" type="button" href="{{ path('promotion_front_index_order_Old') }}">Order By Old Price</a></div>
+            <a class="btn filter__btn filter__btn--style-1" type="button" href="{{ path('promotion_front_index_order_Old') }}">Tri par ANCIEN PRIX</a></div>
         <div class="filter__category-wrapper">
 
-            <a class="btn filter__btn filter__btn--style-1" type="button" href="{{ path('promotion_front_index_order_New') }}">Order By New Price</a></div>
+            <a class="btn filter__btn filter__btn--style-1" type="button" href="{{ path('promotion_front_index_order_New') }}">Tri par NOUVEAU PRIX</a></div>
 
     </div>
     <div class="filter__grid-wrapper u-s-m-t-30">
 
-       
+
         <div class="row">
             {% for promotion in promotions %}
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item headphone">
@@ -70,14 +70,14 @@
                         </div>
                     </div>
 
-                    <span class="product-o__category">                        <a href="shop-side-version-2.html">{{ promotion.typePromo }}</a></span>
+                    <span class="product-o__category"> <a href="shop-side-version-2.html">{{ promotion.typePromo }}</a></span>
 
-                    <span class="product-o__name">                                                    <a href="product-detail.html">{{ promotion.titrePromo }}</a></span>
+                    <span class="product-o__name">  <a href="product-detail.html">{{ promotion.titrePromo }}</a></span>
                     <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
 
                         <span class="product-o__review">(23)</span>
                     </div>
-                    <span class="product-o__category">                                                    <a href="shop-side-version-2.html">{{ promotion.descPromo }}</a></span>
+                    <span class="product-o__category">   <a href="shop-side-version-2.html">{{ promotion.descPromo }}</a></span>
                     <span class="product-o__price">{{ promotion.prixNv }}<span class="product-o__discount">{{ promotion.prixAncien }}</span></span>
                 </div>
             </div>
